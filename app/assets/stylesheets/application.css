@@ -13,3 +13,20 @@
  *= require_tree .
  *= require_self
  */
+.slider {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 1rem;
+}
+
+.note-slide {
+  min-width: 200px;
+  flex-shrink: 0;
+  background: #8e8383;
+  border-radius: 8px;
+  padding: 1rem;
+  scroll-snap-align: start;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}

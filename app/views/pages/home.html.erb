@@ -7,38 +7,58 @@
 </head>
 <body>
   <header>
+  <div class="header-left">
     <div class="logo">Web Note</div>
-    <nav>
-      <ul>
-        <li><a href="#">All Notes</a></li>
-        <li><a href="#">Grammar</a></li>
-        <li><a href="#">Vocabulary</a></li>
-        <li><a href="#">Idioms</a></li>
-      </ul>
-    </nav>
-    <div class="search-login">
+  </div>
+  <div class="header-center">
+    <div class="search-box">
       <input type="text" placeholder="Search notes...">
       <button>Search</button>
-      <a href="#">Login</a>
-      <a href="#">📘</a>
     </div>
-  </header>
+  </div>
+  <div class="header-right">
+    <a href="#">Login</a>
+    <a href="#">📘</a>
+  </div>
+</header>
 
   <main>
-    <section class="banner">
-      <div class="banner-item">
-        <h2>Grammar Tips</h2>
-        <p>Understand tenses, clauses, and sentence patterns</p>
+     <nav>
+        <ul>
+          <li><a href="#">All Notes</a></li>
+          <li><a href="#">Grammar</a></li>
+          <li><a href="#">Vocabulary</a></li>
+          <li><a href="#">Idioms</a></li>
+        </ul>
+     </nav>
+     <section class="banner">
+      <div class="slider" data-controller="slider">
+          <div class="note-slide">
+             <h3>Grammar Tip</h3>
+             <p>Use present perfect for experiences.</p>
+          </div>
+          <div class="note-slide">
+             <h3>Vocabulary</h3>
+             <p>‘Serendipity’ means a happy accident.</p>
+          </div>
+          <div class="note-slide">
+             <h3>Idiom</h3>
+             <p>‘Break the ice’ means to start a conversation.</p>
+          </div>
+          <div class="note-slide">
+             <h3>Grammar Tip</h3>
+             <p>Use present perfect for experiences.</p>
+          </div>
+          <div class="note-slide">
+             <h3>Grammar Tip</h3>
+             <p>Use present perfect for experiences.</p>
+          </div>
+          <div class="note-slide">
+             <h3>Grammar Tip</h3>
+             <p>Use present perfect for experiences.</p>
+          </div>
       </div>
-      <div class="banner-item">
-        <h2>Vocabulary Boost</h2>
-        <p>Expand your word bank with examples and usage</p>
-      </div>
-      <div class="banner-item">
-        <h2>Idioms & Phrases</h2>
-        <p>Learn natural expressions used by native speakers</p>
-      </div>
-    </section>
+     </section>
   </main>
 </body>
 </html>
