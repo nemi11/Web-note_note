@@ -1,10 +1,9 @@
-<<<<<<< HEAD
 source "https://rubygems.org"
 
 ruby "3.2.8"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 7.1.5", ">= 7.1.5.2"
+gem "rails", "~> 7.1.5.2"
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
@@ -66,8 +65,3 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
-=======
-# Gemfile
-source "https://rubygems.org"
-gem "rails", "~> 7.1.5"
->>>>>>> f7a9df83d20bf1b75d9abb7119679fe4558117f0
