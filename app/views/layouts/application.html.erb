@@ -10,31 +10,44 @@
   </head>
 
   <body>
-    <header>
-      <div class="header-left">
-        <div class="logo">Web Note</div>
-      </div>
-      <div class="header-center">
-        <div class="search-box">
-          <input type="text" placeholder="Search notes...">
-          <button>Search</button>
+    <div class="page-wrapper">
+      <header>
+        <div class="header-center">
+          <div class="search-group">
+            <div class="logo">Web Note</div>
+            <div class="search-box">
+              <input type="text" placeholder="Search notes...">
+              <button>Search</button>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="header-right">
-        <a href="#">Login</a>
-        <a href="#">📘</a>
-      </div>
-    </header>
+        <div class="header-light">
+          <a href="/login" class="login-link">ログイン</a>
+          <button class="menu-button">≡</button>
+        </div>
+      </header>
 
-    <nav>
-      <ul>
-        <li><a href="#">All Notes</a></li>
-        <li><a href="#">Grammar</a></li>
-        <li><a href="#">Vocabulary</a></li>
-        <li><a href="#">Idioms</a></li>
-      </ul>
-    </nav>
+      <nav>
+        <ul>
+          <li><a href="#">All Notes</a></li>
+          <li><a href="#">Grammar</a></li>
+          <li><a href="#">Vocabulary</a></li>
+          <li><a href="#">Idioms</a></li>
+        </ul>
+      </nav>
 
-    <%= yield %>
+      <main>
+        <%= yield %>
+      </main>
+
+      <footer class="site-footer">
+        <div class="footer-links">
+          <a href="/terms">利用規約</a>
+          <span>|</span>
+          <a href="/privacy">プライバシーポリシー</a>
+        </div>
+        <p class="copyright">© 2025 Web Note</p>
+      </footer>
+    </div>
   </body>
 </html>
