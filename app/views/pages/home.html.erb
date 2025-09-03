@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>English Note Hub</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <header>
+<header>
   <div class="header-left">
     <div class="logo">Web Note</div>
   </div>
@@ -22,43 +14,27 @@
   </div>
 </header>
 
-  <main>
-     <nav>
-        <ul>
-          <li><a href="#">All Notes</a></li>
-          <li><a href="#">Grammar</a></li>
-          <li><a href="#">Vocabulary</a></li>
-          <li><a href="#">Idioms</a></li>
-        </ul>
-     </nav>
-     <section class="banner">
-      <div class="slider" data-controller="slider">
-          <div class="note-slide">
-             <h3>Grammar Tip</h3>
-             <p>Use present perfect for experiences.</p>
-          </div>
-          <div class="note-slide">
-             <h3>Vocabulary</h3>
-             <p>‘Serendipity’ means a happy accident.</p>
-          </div>
-          <div class="note-slide">
-             <h3>Idiom</h3>
-             <p>‘Break the ice’ means to start a conversation.</p>
-          </div>
-          <div class="note-slide">
-             <h3>Grammar Tip</h3>
-             <p>Use present perfect for experiences.</p>
-          </div>
-          <div class="note-slide">
-             <h3>Grammar Tip</h3>
-             <p>Use present perfect for experiences.</p>
-          </div>
-          <div class="note-slide">
-             <h3>Grammar Tip</h3>
-             <p>Use present perfect for experiences.</p>
-          </div>
-      </div>
-     </section>
-  </main>
-</body>
-</html>
+<main>
+  <nav>
+    <ul>
+      <li><a href="#">All Notes</a></li>
+      <li><a href="#">Grammar</a></li>
+      <li><a href="#">Vocabulary</a></li>
+      <li><a href="#">Idioms</a></li>
+    </ul>
+  </nav>
+
+  <section class="banner" data-controller="carousel">
+  <div data-carousel-target="slides" class="slides">
+    <div class="slide">Slide 1</div>
+    <div class="slide">Slide 2</div>
+    <div class="slide">Slide 3</div>
+  </div>
+
+  <div data-carousel-target="dots" class="dots">
+    <span class="dot" data-action="click->carousel#goToSlide" data-index="0"></span>
+    <span class="dot" data-action="click->carousel#goToSlide" data-index="1"></span>
+    <span class="dot" data-action="click->carousel#goToSlide" data-index="2"></span>
+  </div>
+</section>
+</main>
