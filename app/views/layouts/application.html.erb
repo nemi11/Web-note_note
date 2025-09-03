@@ -1,12 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8">
     <title>English Note Hub</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>  <!-- ← これが正解 -->
+    <%= javascript_importmap_tags %>
   </head>
+
   <body>
+    <header>
+      <div class="header-left">
+        <div class="logo">Web Note</div>
+      </div>
+      <div class="header-center">
+        <div class="search-box">
+          <input type="text" placeholder="Search notes...">
+          <button>Search</button>
+        </div>
+      </div>
+      <div class="header-right">
+        <a href="#">Login</a>
+        <a href="#">📘</a>
+      </div>
+    </header>
+
+    <nav>
+      <ul>
+        <li><a href="#">All Notes</a></li>
+        <li><a href="#">Grammar</a></li>
+        <li><a href="#">Vocabulary</a></li>
+        <li><a href="#">Idioms</a></li>
+      </ul>
+    </nav>
+
     <%= yield %>
   </body>
 </html>

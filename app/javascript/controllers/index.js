@@ -1,4 +1,5 @@
-import { application } from "./application"
-import CarouselController from "./carousel_controller"
+import { Application } from "@hotwired/stimulus" // ← Application を import
+import CarouselController from "./carousel_controller" // ← Controller を import
 
-application.register("carousel", CarouselController)
+const application = Application.start()
+application.register("carousel", CarouselController) // ← Controller を登録

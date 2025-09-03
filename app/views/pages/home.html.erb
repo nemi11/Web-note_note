@@ -1,40 +1,21 @@
-<header>
-  <div class="header-left">
-    <div class="logo">Web Note</div>
-  </div>
-  <div class="header-center">
-    <div class="search-box">
-      <input type="text" placeholder="Search notes...">
-      <button>Search</button>
+<section class="banner" data-controller="carousel">
+  <div class="carousel-container">
+    <button class="prev" data-action="click->carousel#prevSlide">‹</button>
+
+    <div data-carousel-target="slides" class="slides-wrapper">
+      <div class="slide">Slide 1</div>
+      <div class="slide">Slide 2</div>
+      <div class="slide">Slide 3</div>
+      <div class="slide">Slide 4</div>
+      <div class="slide">Slide 5</div>
     </div>
-  </div>
-  <div class="header-right">
-    <a href="#">Login</a>
-    <a href="#">📘</a>
-  </div>
-</header>
 
-<main>
-  <nav>
-    <ul>
-      <li><a href="#">All Notes</a></li>
-      <li><a href="#">Grammar</a></li>
-      <li><a href="#">Vocabulary</a></li>
-      <li><a href="#">Idioms</a></li>
-    </ul>
-  </nav>
-
-  <section class="banner" data-controller="carousel">
-  <div data-carousel-target="slides" class="slides">
-    <div class="slide">Slide 1</div>
-    <div class="slide">Slide 2</div>
-    <div class="slide">Slide 3</div>
+    <button class="next" data-action="click->carousel#nextSlide">›</button>
   </div>
 
   <div data-carousel-target="dots" class="dots">
-    <span class="dot" data-action="click->carousel#goToSlide" data-index="0"></span>
-    <span class="dot" data-action="click->carousel#goToSlide" data-index="1"></span>
-    <span class="dot" data-action="click->carousel#goToSlide" data-index="2"></span>
+    <% 5.times do |i| %>
+      <span class="dot" data-action="click->carousel#goToSlide" data-index="<%= i %>"></span>
+    <% end %>
   </div>
 </section>
-</main>
