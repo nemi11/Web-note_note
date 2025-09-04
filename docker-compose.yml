@@ -16,6 +16,7 @@ services:
     build: .
     volumes:
       - .:/rails
+      - bundle_data:/usr/local/bundle   # ← 追加
     ports:
       - "3000:3000"
     depends_on:
@@ -28,6 +29,7 @@ services:
 
 volumes:
   db_data:
+  bundle_data:                         # ← 追加
 
 
 
