@@ -5,7 +5,12 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <!-- 全ページ共通 CSS -->
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+
+    <!-- ページごとの追加 CSS を差し込む -->
+    <%= yield :page_css %>
+
     <%= javascript_importmap_tags %>
   </head>
 
@@ -21,31 +26,20 @@
             </div>
           </div>
         </div>
-     <div class="header-light">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-  <a href="/signup" class="signup-link">会員登録</a>
-  <a href="/login" class="login-link">ログイン</a>
-  <i class="fa-solid fa-bell"></i>
-  <i class="fa-solid fa-heart"></i>
-
-  <div data-controller="menu" class="menu-icon">
-    <i class="fa-solid fa-bars" data-action="click->menu#toggle"></i>
-  </div>
-</div>
+        <div class="header-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+          <a href="/signup" class="signup-link">会員登録</a>
+          <a href="/login" class="login-link">ログイン</a>
+          <i class="fa-solid fa-bell"></i>
+          <i class="fa-solid fa-heart"></i>
+          <div data-controller="menu" class="menu-icon">
+            <i class="fa-solid fa-bars" data-action="click->menu#toggle"></i>
+          </div>
+        </div>
       </header>
 
-      <nav>
-        <ul>
-          <li><a href="#">All Notes</a></li>
-          <li><a href="#">Grammar</a></li>
-          <li><a href="#">Vocabulary</a></li>
-          <li><a href="#">Idioms</a></li>
-        </ul>
-      </nav>
-
       <main>
-        <%= yield %>
+        <%= yield %> <!-- 各ページのコンテンツ -->
       </main>
 
       <footer class="site-footer">

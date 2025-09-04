@@ -1,7 +1,15 @@
-<section class="banner" data-controller="carousel">
+<body>
+      <nav>
+        <ul>
+          <li><a href="#">All Notes</a></li>
+          <li><a href="#">Grammar</a></li>
+          <li><a href="#">Vocabulary</a></li>
+          <li><a href="#">Idioms</a></li>
+        </ul>
+      </nav>
+  <section class="banner" data-controller="carousel">
   <div class="carousel-container">
     <button class="prev" data-action="click->carousel#prevSlide">‹</button>
-
     <div data-carousel-target="slides" class="slides-wrapper">
       <div class="slide">Slide 1</div>
       <div class="slide">Slide 2</div>
@@ -9,13 +17,14 @@
       <div class="slide">Slide 4</div>
       <div class="slide">Slide 5</div>
     </div>
-
     <button class="next" data-action="click->carousel#nextSlide">›</button>
   </div>
-
   <div data-carousel-target="dots" class="dots">
     <% 5.times do |i| %>
       <span class="dot" data-action="click->carousel#goToSlide" data-index="<%= i %>"></span>
     <% end %>
   </div>
-</section>
+  </section>
+  </div>
+</body>
+

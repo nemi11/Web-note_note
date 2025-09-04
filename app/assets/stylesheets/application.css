@@ -1,22 +1,44 @@
-/* フォント変更（Google FontsなどもOK） */
-.logo {
-  font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
-  font-size: 24px;
-  font-weight: bold;
-  color: white;
+/* ============================= */
+/* 全体リセットとボックスサイズ */
+/* ============================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* 余白で崩れにくくする */
 }
 
-/* ヘッダー全体 */
+html, body {
+  height: 100%;
+  font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+}
+
+/* ============================= */
+/* ページ全体ラッパー */
+/* ============================= */
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* 画面全体に伸ばす */
+}
+
+main {
+  flex: 1; /* コンテンツが少なくてもフッターを下に押し出す */
+  padding: 20px;
+}
+
+/* ============================= */
+/* ヘッダー */
+/* ============================= */
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #2c2a4d; /* ←好きな色に変更OK */
-  padding: 10px 20px;
+  background-color: #2c2a4d;
   color: white;
+  padding: 10px 20px;
 }
 
-/* 左側：ログイン＋メニュー */
+/* 左側メニュー */
 .header-left {
   display: flex;
   align-items: center;
@@ -25,23 +47,20 @@ header {
 
 .header-light {
   display: flex;
-  align-items: center; /* 垂直方向のズレを防ぐ */
-  gap: 1rem;            /* 要素間のスペース */
+  align-items: center;
+  gap: 1rem;
   padding: 0.5rem 1rem;
 }
 
 .menu-icon {
-  margin-left: auto; /* 一番左に配置＆他の要素を右に押し出す */
+  margin-left: auto;
 }
 
-.login-link {
+.login-link,
+.signup-link {
   color: white;
   text-decoration: none;
   font-weight: 500;
-}
-
-.signup-link {
-  color: white;
 }
 
 .menu-button {
@@ -52,13 +71,20 @@ header {
   cursor: pointer;
 }
 
-/* 中央：ロゴ＋検索 */
+/* 中央ロゴ＋検索 */
 .header-center {
   display: flex;
   justify-content: center;
   flex: 1;
 }
 
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+}
+
+/* 検索ボックス */
 .search-group {
   display: flex;
   align-items: center;
@@ -79,6 +105,10 @@ header {
   border: none;
   cursor: pointer;
 }
+
+/* ============================= */
+/* ナビゲーションメニュー */
+/* ============================= */
 nav ul {
   display: flex;
   justify-content: center;
@@ -87,13 +117,16 @@ nav ul {
   padding: 0;
   margin: 30px 0;
 }
+
 nav ul li a {
   text-decoration: none;
   color: #333;
   font-weight: bold;
 }
 
+/* ============================= */
 /* カルーセル */
+/* ============================= */
 .carousel-container {
   position: relative;
   width: 100%;
@@ -107,7 +140,6 @@ nav ul li a {
   transition: transform 0.5s ease-in-out;
 }
 
-/* .slide の box-shadow を1回に */
 .slide {
   flex: 0 0 30%;
   height: 250px;
@@ -158,29 +190,19 @@ button.next { right: 10px; }
   background-color: #333;
 }
 
-html, body {
-  height: 100%;
-  margin: 0;
-}
-
-.page-wrapper {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-main {
-  flex: 1; /* ← ここが空間を埋める */
-  padding: 20px;
-}
-
+/* ============================= */
 /* フッター */
+/* ============================= */
 .site-footer {
   background-color: #2c2a4d;
   color: white;
   text-align: center;
   padding: 20px 10px;
   font-size: 14px;
+  border-top: 2px solid #ffffff; /* 下線追加 */
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 
 .footer-links a {
@@ -188,6 +210,7 @@ main {
   text-decoration: none;
   margin: 0 8px;
 }
+
 .footer-links a:hover {
   text-decoration: underline;
 }
