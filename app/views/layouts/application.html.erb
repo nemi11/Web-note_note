@@ -21,10 +21,18 @@
             </div>
           </div>
         </div>
-        <div class="header-light">
-          <a href="/login" class="login-link">ログイン</a>
-          <button class="menu-button">≡</button>
-        </div>
+     <div class="header-light">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <a href="/signup" class="signup-link">会員登録</a>
+  <a href="/login" class="login-link">ログイン</a>
+  <i class="fa-solid fa-bell"></i>
+  <i class="fa-solid fa-heart"></i>
+
+  <div data-controller="menu" class="menu-icon">
+    <i class="fa-solid fa-bars" data-action="click->menu#toggle"></i>
+  </div>
+</div>
       </header>
 
       <nav>
