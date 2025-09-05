@@ -48,3 +48,9 @@
   background-color: #1c1a3d;
 }
 
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  text-decoration: none; /* 下線を消す */
+}
