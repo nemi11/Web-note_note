@@ -7,10 +7,9 @@
 
     <!-- 全ページ共通 CSS -->
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-
+  
     <!-- ページごとの追加 CSS を差し込む -->
     <%= yield :page_css %>
-
     <%= javascript_importmap_tags %>
   </head>
 

@@ -214,3 +214,19 @@ button.next { right: 10px; }
 .footer-links a:hover {
   text-decoration: underline;
 }
+/* フラッシュメッセージ */
+.flash-notice {
+  background-color: #e6ffed;
+  color: #007b2e;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 6px;
+}
+
+.flash-alert {
+  background-color: #efe7e7 !important;
+  color: #df1111 !important;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 6px;
+}
