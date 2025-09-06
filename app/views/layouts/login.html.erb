@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Web Note - Login</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "users", "data-turbo-track": "reload" %> <!-- ログイン用CSS -->
+
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <!-- ロゴだけのヘッダー -->
+    <header class="login-header">
+      <div class="logo">
+        <%= link_to "Web Note", root_path, style: "text-decoration: none; color: white;" %>
+      </div>
+    </header>
+
+    <!-- ログインフォーム部分 -->
+    <main class="login-main">
+      <%= yield %>
+    </main>
+  </body>
+</html>
+

@@ -1,0 +1,96 @@
+[33mcommit 9e34f295041802f9ed3d592cbc18ec07a7456557[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32m04_login[m[33m)[m
+Author: nemi11 <nemi_ra_men@yahoo.co.jp>
+Date:   Fri Sep 5 19:04:53 2025 +0900
+
+    メインページからの重複調整前
+
+[33mcommit c27c3cccaf29c8d33518a834fbd369361b0d0525[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;31morigin/03_Membership_registration[m[33m, [m[1;32mmain[m[33m, [m[1;32m03_Membership_registration[m[33m)[m
+Author: nemi11 <nemi_ra_men@yahoo.co.jp>
+Date:   Fri Sep 5 17:15:00 2025 +0900
+
+    ロゴから戻る
+
+[33mcommit efc8f9f197a976e4ef6239db4446589daa40499e[m
+Author: nemi11 <nemi_ra_men@yahoo.co.jp>
+Date:   Fri Sep 5 17:10:45 2025 +0900
+
+    登録のフラッシュメッセージ
+
+[33mcommit 5cf9bf38d70b894b1fa5c424d9eb11675180481c[m
+Author: nemi11 <nemi_ra_men@yahoo.co.jp>
+Date:   Thu Sep 4 23:10:15 2025 +0900
+
+    会員登録レイアウトprototyping
+
+[33mcommit 66758d2ab546d9c64a3453b53efe621ca891dc49[m
+Author: nemi11 <nemi_ra_men@yahoo.co.jp>
+Date:   Thu Sep 4 21:53:46 2025 +0900
+
+    会員登録ルート設定
+
+[33mcommit cb678da3a02fde0ace190425aeedfffcb4c8f1f7[m
+Author: nemi11 <nemi_ra_men@yahoo.co.jp>
+Date:   Thu Sep 4 15:08:21 2025 +0900
+
+    トップページ調整
+
+[33mcommit ac7676f42ad9e937798b620d3259c27fdee5b43c[m[33m ([m[1;31morigin/02_top_page[m[33m, [m[1;32m02_top_page[m[33m)[m
+Author: nemi11 <nemi_ra_men@yahoo.co.jp>
+Date:   Wed Sep 3 19:56:24 2025 +0900
+
+    トップページの配置
+
+[33mcommit 71a12e41f546501f5ea5784bdac0686be0f3c147[m
+Author: nemi11 <nemi_ra_men@yahoo.co.jp>
+Date:   Wed Sep 3 19:18:36 2025 +0900
+
+    カルーセル試2
+
+[33mcommit 97c2795c5c1025903d8545f0026e092657032613[m
+Author: nemi11 <nemi_ra_men@yahoo.co.jp>
+Date:   Wed Sep 3 14:51:41 2025 +0900
+
+    カルーセル試
+
+[33mcommit 36e2835f5d5530708bb4d44cc4a3d8e459542b52[m
+Author: nemi11 <nemi_ra_men@yahoo.co.jp>
+Date:   Tue Sep 2 19:00:10 2025 +0900
+
+    トップページの雰囲気2
+
+[33mcommit 563890fc53ca9d157e45401b54c8b63861f18c6c[m
+Author: nemi11 <nemi_ra_men@yahoo.co.jp>
+Date:   Tue Sep 2 17:50:40 2025 +0900
+
+    トップページの雰囲気
+
+[33mcommit 74a25faba790624f914abad7b11337a06c3c4c73[m
+Author: nemi11 <nemi_ra_men@yahoo.co.jp>
+Date:   Tue Sep 2 13:27:19 2025 +0900
+
+    トップページ表示まで
+
+[33mcommit 5e1dda652d6cd38a58b4635396fca958f3a48418[m[33m ([m[1;31morigin/01_environment_construction[m[33m, [m[1;32m01_environment_construction[m[33m)[m
+Merge: f4008ab f7a9df8
+Author: nemi11 <nemi_ra_men@yahoo.co.jp>
+Date:   Mon Sep 1 20:22:59 2025 +0900
+
+    アプリ起動までの修正
+
+[33mcommit f4008aba494436beb9eb413d46141840115a8c53[m
+Author: nemi11 <nemi_ra_men@yahoo.co.jp>
+Date:   Mon Sep 1 20:09:31 2025 +0900
+
+    アプリ起動まで
+
+[33mcommit f7a9df83d20bf1b75d9abb7119679fe4558117f0[m
+Author: nemi11 <nemi_ra_men@yahoo.co.jp>
+Date:   Mon Sep 1 15:11:31 2025 +0900
+
+    初期Railsアプリ前
+
+[33mcommit 20edc3ab055fca07b3fdf11853d6385cac4ba978[m
+Author: nemi11 <nemi_ra_men@yahoo.co.jp>
+Date:   Mon Sep 1 11:13:18 2025 +0900
+
+    first commit
