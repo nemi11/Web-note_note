@@ -137,3 +137,23 @@
 .login-form .submit-button:hover {
   background-color: #1c1a3d;
 }
+
+/* フラッシュメッセージ */
+.flash-notice, .flash-alert {
+  width: 100%;
+  max-width: 400px;
+  padding: 12px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.flash-notice {
+  background-color: #e6ffed;
+  color: #007b2e;
+}
+
+.flash-alert {
+  background-color: #ffe6e6;
+  color: #bc0000;
+}
