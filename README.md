@@ -1,0 +1,143 @@
+# Web Note for English Learners
+
+英語学習者のための、完全カスタマイズ可能な英語のメモ。  
+シチュエーション別にフレーズを検索・保存でき、単語帳やタグ管理も可能。  
+学習スタイルに合わせて自由にノートを構築できます。
+
+---
+
+## Motivation
+
+「自分が使いたい場面での表現を集めたい」  
+そんな思いと、自分自身の学習体験から実用性と柔軟性がある、
+自由度の高いノートツールを作りたいと思いました  。
+
+
+---
+
+## Target Users
+
+- 中高生・大学生：学習や興味に沿った表現を集めたい
+- 社会人：目的別に効率よく英語を管理したい
+- 旅行者など：場面で使える例文や単語帳を作成・共有したい
+- 英語学習者：イディオム、専門用語など使い方を共有し理解を高めたい
+
+初中級者
+年代としては、大学生〜社会人の独学者の層に使って頂きたいです。
+
+---
+
+## Usage Example
+
+- 「空港で使える英語」などのシチュエーションで検索
+- 関連フレーズをノートに追加し、タグや色分けで整理
+- 単語帳を作成し、スペースドリピティションで復習
+- AIによる表現提案やフィードバック（今後できたら実装予定）
+
+---
+
+## User Acquisition Strategy
+
+- 英語学習系SNSで発信（X, Instagram, Reddit）
+
+---
+
+## Differentiation
+
+web noteは、英語学習者が自分の言葉で記録し、振り返ることに特化したノートアプリです。  
+AnkiやQuizletのようなカード型学習とは異なり、Markdown記法・タグ・履歴管理を活用することで、より柔軟で深い復習を目指します。
+
+特徴1：自由なノート記法と構造化
+ユーザーは英語文・訳・補足をMarkdownで記録し、タグで分類することで、自分だけの学習構造を作ることができます。
+
+特徴2：復習に特化・共有でインプットも可能
+インプットした英語をより分かり易くメモすることによっていつでも復習できます
+
+特徴3：やさしいUIと記録体験
+初心者でも安心して使える設計に加え、ノートを書くこと自体が学習になるような記録体験を提供できるようにします。
+
+| 項目| web note）| Anki（Ankilot）| Quizlet|
+|-----|----------|----------------|--------|
+| 復習スタイル 　   | ◎ 自由記述＋履歴で復習 　　　　 | ◎ 反復                 | ○ 単語カード＋テスト形式   |
+| ノートの自由度    | ◎ Markdown記法・タグ・構造化可能| △ 基本はカード形式のみ  | ○ 単語帳＋画像・音声挿入可能|
+| UIのやさしさ     | ◎ 初心者向け・やさしい設計       | △ やや技術者向け・複雑  | ○ ゲーミフィケーションあり|
+| 共有・公開機能    | ○ 任意でノートを共有可能      | ○ デッキ共有可能        | ◎ 他人の単語帳を検索・利用可能|
+| 価格・収益モデル  | ◎ 完全無料 　　　　　　　　　　　　  | ◎ 完全無料　　　　　　  | ○ 無料＋有料プランあり|  
+
+---
+
+## Planned Features
+
+| リリース段階  | 機能 |
+|--------------|-----|
+| MVP          | ノート作成・編集、タグ管理、シチュエーション検索、単語帳作成 |
+| 本リリース    | スペースドリピティション、ノート共有、音声読み上げ、|
+
+---
+
+## Tech Stack
+
+- **Framework**：Ruby on Rails 7 + Hotwire (Turbo + Stimulus)
+- **CSS**：Tailwind CSS
+- **Database**：PostgreSQL
+- **Deployment**：Render（またはHeroku）
+- **Main Gems**：
+  - Devise（ユーザー認証）
+  - Acts-as-taggable-on（タグ機能）
+  - Ransack（検索機能）
+  - Sidekiq（非同期ジョブ）
+  - Stimulus-use（UIインタラクション強化）
+
+---
+
+## Setup Instructions
+
+### Requirements
+
+- Ruby 3.2.x  
+- Node.js & Yarn  
+- PostgreSQL  
+
+### Installation
+
+```bash
+bundle install
+yarn install
+rails db:create db:migrate db:seed
+```
+
+### Running the App
+
+```bash
+bin/dev
+```
+
+### Running Tests
+
+```bash
+bundle exec rspec
+```
+
+---
+
+## Services
+
+- **Job Queue**：Sidekiq  
+- **Search Engine**：Ransack  
+- **Cache Server**：Redis（予定）
+
+---
+
+## Deployment
+
+Renderを使用してデプロイ予定。  
+環境変数は `.env` ファイルで管理。
+
+---
+
+## Contact
+
+開発者: ねね
+Twitter: [@nene_RUNTEQ]  
+Email: ne081310751569@gmail.com
+
