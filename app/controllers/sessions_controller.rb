@@ -1,22 +1,26 @@
-# app/controllers/sessions_controller.rb
 class SessionsController < ApplicationController
+  layout "login", only: [:new]
+
   def new
-    # ログインフォームを表示するだけ
+    # ログインフォーム表示
   end
 
   def create
-    user = User.find_by(email: params[:email])
+    user = User.find_by(email: params[:email].downcase)
     if user&.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect_to root_path, notice: "ログインしました"
+      flash[:notice] = "ログインしました"
+      redirect_to root_path
     else
-      flash.now[:alert] = "メールアドレスまたはパスワードが違います"
-      render :new, status: :unprocessable_entity
+      flash.now[:alert] = "メールアドレスかパスワードが間違っています"
+      render :new, layout: "login"
     end
   end
 
   def destroy
     session.delete(:user_id)
-    redirect_to root_path, notice: "ログアウトしました"
+    flash[:notice] = "ログアウトしました"
+    redirect_to root_path
+
   end
 end

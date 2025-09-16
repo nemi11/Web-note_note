@@ -54,3 +54,86 @@
   color: white;
   text-decoration: none; /* 下線を消す */
 }
+
+/* ロゴを中央に配置 */
+.login-header {
+  background-color: #2c2a4d;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.login-header .logo a {
+  font-size: 28px;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+}
+
+/* ログインページ全体 */
+.login-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
+}
+
+.login-header {
+  background-color: #2c2a4d;
+  padding: 20px 0;
+  display: flex;
+  justify-content: center; /* 中央に配置 */
+  align-items: center;
+}
+
+.login-header .logo a {
+  font-size: 28px;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+}
+
+
+/* フォームを整える */
+.login-form {
+  background: #fff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-form h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.login-form .form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.login-form input[type="email"],
+.login-form input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.login-form .submit-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #2c2a4d;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.login-form .submit-button:hover {
+  background-color: #1c1a3d;
+}
