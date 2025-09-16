@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
       redirect_to root_path
     else
       flash.now[:alert] = "メールアドレスかパスワードが間違っています"
-      render :new
+      render :new, layout: "login"
     end
   end
 
