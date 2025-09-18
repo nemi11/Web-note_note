@@ -142,7 +142,7 @@ Twitter: [@nene_RUNTEQ]
 Email: ne081310751569@gmail.com
 
 ### 画面遷移図
-Figma：https://www.figma.com/design/V8KRYsFYtdB30aqUWS3VAG/web-note?node-id=109-989&t=qlDlN43TzIYveCiC-0
+https://www.figma.com/design/HGvF3RSCJrkWw5X6dBHEv7/web-note--%E3%82%B3%E3%83%94%E3%83%BC-?node-id=0-1&p=f&t=NQuzM7QTxMps8ArH-0
 
 ### READMEに記載した機能
 - [ ] ユーザー登録機能
