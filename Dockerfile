@@ -47,7 +47,7 @@ COPY . .
 RUN bundle exec bootsnap precompile app/ lib/
 
 # assets:precompile（仮の key で）
-RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
+RUN SECRET_KEY_BASE_DUMMY=1 DATABASE_URL=postgres://myapp:password@localhost/myapp_production ./bin/rails assets:precompile
 
 # ---- Final stage ----
 FROM base

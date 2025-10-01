@@ -1,4 +1,3 @@
-version: "3"
 services:
   db:
     image: postgres:15
@@ -13,6 +12,8 @@ services:
 
   web:
     build: .
+    env_file:
+      - .env   # ← ここで指定
     volumes:
       - .:/rails                # ホストのコードをコンテナに反映
       - bundle_data:/usr/local/bundle
