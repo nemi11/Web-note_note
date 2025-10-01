@@ -1,66 +1,75 @@
-# syntax = docker/dockerfile:1
+# syntax=docker/dockerfile:1
 
-# Make sure RUBY_VERSION matches the Ruby version in .ruby-version and Gemfile
+# Ruby バージョン指定
 ARG RUBY_VERSION=3.2.8
-FROM registry.docker.com/library/ruby:$RUBY_VERSION-slim as base
+FROM ruby:$RUBY_VERSION-slim as base
 
 # Rails app lives here
 WORKDIR /rails
 
-# Set production environment
+# Set environment variables
 ENV RAILS_ENV="production" \
     BUNDLE_DEPLOYMENT="1" \
     BUNDLE_PATH="/usr/local/bundle" \
     BUNDLE_WITHOUT="development test"
 
-# Throw-away build stage to reduce size of final image
+# ---- Build stage ----
 FROM base as build
 
-# Install packages needed to build gems
+# 必要なパッケージをインストール（コンパイルに必要なもの全部）
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y \
-    build-essential \
-    libpq-dev \
-    git \
-    libvips \
-    pkg-config \
-    libyaml-dev
+      build-essential \
+      libpq-dev \
+      git \
+      curl \
+      pkg-config \
+      zlib1g-dev \
+      libyaml-dev \
+      libgmp-dev \
+      libffi-dev \
+      libxml2-dev \
+      libxslt1-dev \
+      libvips-dev && \
+    rm -rf /var/lib/apt/lists/*
 
-# Install application gems
+
+# Gemfile をコピーして bundle install
 COPY Gemfile Gemfile.lock ./
 RUN bundle install && \
     rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
     bundle exec bootsnap precompile --gemfile
 
-# Copy application code
+# アプリケーションコードをコピー
 COPY . .
 
-# Precompile bootsnap code for faster boot times
+# bootsnap precompile
 RUN bundle exec bootsnap precompile app/ lib/
 
-# Precompiling assets for production without requiring secret RAILS_MASTER_KEY
+# assets:precompile（仮の key で）
 RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
-# Final stage for app image
+# ---- Final stage ----
 FROM base
 
-# Install packages needed for deployment
+# Runtime に必要な最低限のパッケージだけ
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y curl postgresql-client libvips && \
-    rm -rf /var/lib/apt/lists /var/cache/apt/archives
+    rm -rf /var/lib/apt/lists/* /var/cache/apt/archives
 
-# Copy built artifacts: gems, application
+# build ステージから成果物をコピー
 COPY --from=build /usr/local/bundle /usr/local/bundle
 COPY --from=build /rails /rails
 
-# Run and own only the runtime files as a non-root user for security
+# ユーザー設定
 RUN useradd rails --create-home --shell /bin/bash && \
     chown -R rails:rails db log storage tmp
 USER rails:rails
 
-# Entrypoint prepares the database.
+# Entrypoint
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
-# Start the server by default, this can be overwritten at runtime
+# ポート
 EXPOSE 3000
 CMD ["./bin/rails", "server"]
+

@@ -1,4 +1,8 @@
 production:
+  <<: *default
+  # Heroku の DATABASE_URL があればそれを使う
+  url: <%= ENV['DATABASE_URL'] %>
+  # もしローカルで確認したいときの fallback
   adapter: postgresql
   encoding: unicode
   pool: 5
