@@ -1,3 +1,4 @@
+version: "3.9"
 services:
   db:
     image: postgres:15
@@ -13,11 +14,11 @@ services:
   web:
     build:
       context: .
-      target: build  # ← ここで build ステージを指定
+      target: runtime
     env_file:
-      - .env   # ← ここで指定
+      - .env
     volumes:
-      - .:/rails                # ホストのコードをコンテナに反映
+      - .:/app
       - bundle_data:/usr/local/bundle
     ports:
       - "3000:3000"
@@ -25,8 +26,8 @@ services:
       - db
     environment:
       RAILS_ENV: development
-      DATABASE_HOST: db          # Rails database.yml で参照
-      DATABASE_USER: myapp       # Rails database.yml で参照
+      DATABASE_HOST: db
+      DATABASE_USER: myapp
       DATABASE_PASSWORD: password
     stdin_open: true
     tty: true
@@ -35,4 +36,3 @@ services:
 volumes:
   db_data:
   bundle_data:
-
