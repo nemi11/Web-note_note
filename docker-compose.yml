@@ -11,7 +11,9 @@ services:
       - db_data:/var/lib/postgresql/data
 
   web:
-    build: .
+    build:
+      context: .
+      target: build  # ← ここで build ステージを指定
     env_file:
       - .env   # ← ここで指定
     volumes:
