@@ -1,6 +1,11 @@
 /* ============================= */
 /* 全体リセットとボックスサイズ */
 /* ============================= */
+
+.form-group {
+  min-height: 10px; /* エラー表示による高さ変化を防ぐ */
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -18,7 +23,6 @@ html, body {
 .page-wrapper {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* 画面全体に伸ばす */
 }
 
 main {
@@ -224,15 +228,16 @@ button.next { right: 10px; }
 .flash-notice {
   background-color: #e6ffed;
   color: #007b2e;
-  padding: 10px;
-  margin: 10px 0;
+  padding: 20px;
+  margin: 5px 0;
   border-radius: 6px;
 }
 
 .flash-alert {
   background-color: #efe7e7 !important;
-  color: #df1111 !important;
-  padding: 10px;
-  margin: 10px 0;
+  color: #d02121 !important;
+  padding: 20px;
+  margin: 5px 0;
   border-radius: 6px;
 }
+
