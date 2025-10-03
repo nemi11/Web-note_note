@@ -2,15 +2,13 @@
 
 /*登録ページ*/
 .register-page {
-  flex: 1; /* ヘッダーを除いた残りの領域を使う */
+  flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* 縦中央 */
-  align-items: center;     /* 横中央 */
-  padding: 0 20px;         /* 横の余白だけ */
-  text-align: center;
+  justify-content: center;
+  align-items: center;
+  padding: 10px; /* 少し小さめ */
 }
-
 
 .register-page h1 {
   margin-bottom: 30px;
@@ -25,25 +23,18 @@
 
 .register-form {
   width: 100%;
-  background: #fff;
-  padding: 30px 40px;
-  border-radius: 12px;
+  max-width: 360px; /* 少し小さめに調整 */
+  padding: 20px;    /* 内側余白も減らす */
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  max-width: 400px;
 }
 
 .register-form .form-group {
-  margin-bottom: 20px;
-  text-align: left;
+  margin: 8px 0; /* 上下余白を統一して小さめに */
 }
 
-.register-form input[type="text"],
-.register-form input[type="email"],
-.register-form input[type="password"] {
-  width: 100%;
-  padding: 10px;
-  border-radius: 6px;
-  border: 1px solid #493a3a;
+.register-form input {
+  padding: 8px;
+  font-size: 14px; /* 少し小さめ */
 }
 
 .register-form .submit-button {
@@ -59,6 +50,46 @@
 
 .register-form .submit-button:hover {
   background-color: #424242;
+}
+
+/* 登録ページのフラッシュをフォーム幅に合わせる */
+.register-page .flash-notice,
+.register-page .flash-alert {
+  width: 100%;
+  max-width: 360px;   /* フォーム幅に合わせる */
+  margin: 0 0 10px 0; /* 上下の余白を整える */
+  box-sizing: border-box;
+}
+
+.register-form .form-group {
+  margin: 8px 0;
+  position: relative;
+  min-height: 60px;
+}
+
+.register-form .error-message {
+  font-size: 12px;
+  color: red;
+  margin-top: 4px;
+  height: 1em;
+  visibility: hidden;
+}
+
+.register-form .form-group.error .error-message {
+  visibility: visible;
+}
+
+/* ============================= */
+/* フラッシュメッセージ（フォーム幅に合わせる） */
+/* ============================= */
+.register-page .flash-notice,
+.register-page .flash-alert {
+  width: 100%;
+  max-width: 360px;
+  margin: 0 0 10px 0;
+  padding: 10px;
+  border-radius: 6px;
+  box-sizing: border-box;
 }
 
 /* ログインページ全体 */
@@ -126,3 +157,4 @@
 .login-form .submit-button:hover {
   background-color: #2f2f2f;
 }
+
