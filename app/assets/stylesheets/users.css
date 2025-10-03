@@ -1,21 +1,34 @@
 /* app/assets/stylesheets/users.css */
+
+/*登録ページ*/
 .register-page {
-  flex: 1;
+  flex: 1; /* ヘッダーを除いた残りの領域を使う */
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 40px 20px;
+  justify-content: center; /* 縦中央 */
+  align-items: center;     /* 横中央 */
+  padding: 0 20px;         /* 横の余白だけ */
   text-align: center;
 }
+
 
 .register-page h1 {
   margin-bottom: 30px;
   font-size: 28px;
 }
 
+.register-header .logo{
+  font-weight: bold;
+  color: white;
+  text-decoration: none; /* ← 下線を消す */
+}
+
 .register-form {
   width: 100%;
+  background: #fff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   max-width: 400px;
 }
 
@@ -30,13 +43,13 @@
   width: 100%;
   padding: 10px;
   border-radius: 6px;
-  border: 1px solid #ccc;
+  border: 1px solid #493a3a;
 }
 
 .register-form .submit-button {
   width: 100%;
   padding: 12px;
-  background-color: #2c2a4d;
+  background-color: #000000;
   color: white;
   border: none;
   border-radius: 6px;
@@ -45,28 +58,7 @@
 }
 
 .register-form .submit-button:hover {
-  background-color: #1c1a3d;
-}
-
-.logo {
-  font-size: 24px;
-  font-weight: bold;
-  color: white;
-  text-decoration: none; /* 下線を消す */
-}
-
-/* ロゴを中央に配置 */
-.login-header {
-  background-color: #2c2a4d;
-  padding: 20px 0;
-  text-align: center;
-}
-
-.login-header .logo a {
-  font-size: 28px;
-  font-weight: bold;
-  color: white;
-  text-decoration: none;
+  background-color: #424242;
 }
 
 /* ログインページ全体 */
@@ -78,20 +70,17 @@
 }
 
 .login-header {
-  background-color: #2c2a4d;
-  padding: 20px 0;
+  background-color: var(--main-color); /* 共通変数を使う */
   display: flex;
   justify-content: center; /* 中央に配置 */
   align-items: center;
 }
 
 .login-header .logo a {
-  font-size: 28px;
   font-weight: bold;
   color: white;
-  text-decoration: none;
+  text-decoration: none; /* 下線を消す */
 }
-
 
 /* フォームを整える */
 .login-form {
@@ -126,7 +115,7 @@
 .login-form .submit-button {
   width: 100%;
   padding: 12px;
-  background-color: #2c2a4d;
+  background-color: #000000;
   color: white;
   border: none;
   border-radius: 6px;
@@ -135,5 +124,5 @@
 }
 
 .login-form .submit-button:hover {
-  background-color: #1c1a3d;
+  background-color: #2f2f2f;
 }

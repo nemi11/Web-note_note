@@ -1,40 +1,45 @@
 <!-- app/views/users/new.html.erb -->
-    <% content_for :page_css do %>
-     <%= stylesheet_link_tag "users", "data-turbo-track": "reload" %>
-    <% end %>
 
-   <% if flash[:notice] %>
-    <div class="flash-notice"><%= flash[:notice] %></div>
-   <% end %>
-
-   <% if flash[:alert] %>
-    <div class="flash-alert"><%= flash[:alert] %></div>
-   <% end %>
-
-<h1>登録</h1>
-
-<%= form_with model: @user, url: signup_path do |f| %>
-  <div>
-    <%= f.label :name, "名前(ニックネーム)" %><br>
-    <%= f.text_field :name %>
-  </div>
-
-  <div>
-    <%= f.label :email, "メールアドレス" %><br>
-    <%= f.email_field :email %>
-  </div>
-
-  <div>
-    <%= f.label :password, "パスワード" %><br>
-    <%= f.password_field :password %>
-  </div>
-
-  <div>
-    <%= f.label :password_confirmation, "パスワード確認" %><br>
-    <%= f.password_field :password_confirmation %>
-  </div>
-
-  <div>
-    <%= f.submit "登録する" %>
-  </div>
+<% content_for :page_css do %>
+  <%= stylesheet_link_tag "users", "data-turbo-track": "reload" %>
 <% end %>
+
+<!-- フラッシュメッセージ -->
+<% if flash[:notice] %>
+  <div class="flash-notice"><%= flash[:notice] %></div>
+<% end %>
+
+<% if flash[:alert] %>
+  <div class="flash-alert"><%= flash[:alert] %></div>
+<% end %>
+
+<!-- メインコンテンツ -->
+<main class="register-page">
+  <h1>登録</h1>
+
+  <%= form_with model: @user, url: signup_path, class: "register-form" do |f| %>
+    <div class="form-group">
+      <%= f.label :name, "名前(ニックネーム)" %><br>
+      <%= f.text_field :name %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :email, "メールアドレス" %><br>
+      <%= f.email_field :email %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :password, "パスワード" %><br>
+      <%= f.password_field :password %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :password_confirmation, "パスワード確認" %><br>
+      <%= f.password_field :password_confirmation %>
+    </div>
+
+    <div class="form-group">
+      <%= f.submit "登録する", class: "submit-button" %>
+    </div>
+  <% end %>
+</main>

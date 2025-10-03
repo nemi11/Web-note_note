@@ -24,13 +24,14 @@
     </style>
   </head>
   <body>
-    <header>
+    <!-- register-header を追加 -->
+    <header class="register-header">
       <div class="header-center">
         <%= link_to "Web Note", root_path, class: "logo" %>
       </div>
     </header>
 
-    <main>
+    <main class="register-page">
       <%= yield %>
     </main>
   </body>
