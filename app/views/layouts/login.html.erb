@@ -1,28 +1,29 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Web Note - Login</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>Web Note - Login</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= stylesheet_link_tag "users", "data-turbo-track": "reload" %> <!-- ログイン用CSS -->
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= stylesheet_link_tag "users", "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
+</head>
 
-    <%= javascript_importmap_tags %>
-  </head>
+<body>
+  <header class="login-header">
+    <div class="logo">
+      <%= link_to "Web Note", root_path, style: "text-decoration: none; color: white;" %>
+    </div>
+  </header>
 
-  <body>
-    <!-- ロゴだけのヘッダー -->
-    <header class="login-header">
-      <div class="logo">
-        <%= link_to "Web Note", root_path, style: "text-decoration: none; color: white;" %>
-      </div>
-    </header>
+  <main class="login-main">
+    <!-- フラッシュメッセージはここに必ず表示 -->
+    <% flash.each do |type, message| %>
+      <div class="flash-<%= type %>"><%= message %></div>
+    <% end %>
 
-    <!-- ログインフォーム部分 -->
-    <main class="login-main">
-      <%= yield %>
-    </main>
-  </body>
+    <%= yield %>
+  </main>
+</body>
 </html>
-
