@@ -95,8 +95,9 @@
 /* ログインページ全体 */
 .login-main {
   display: flex;
+  flex-direction: column;  /* 上下に並べる */
   justify-content: center;
-  align-items: center;
+  align-items: center;     /* 水平方向の中央揃え */
   min-height: 70vh;
 }
 
@@ -158,3 +159,19 @@
   background-color: #2f2f2f;
 }
 
+/* ログインページ用フラッシュ */
+.flash-notice {
+  background-color: #e6ffed;
+  color: #007b2e;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+}
+
+.flash-alert {
+  background-color: #ffe6e6;
+  color: #d02121;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+}

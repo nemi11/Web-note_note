@@ -38,10 +38,14 @@
       </header>
 
       <main>
-        <%= yield %> <!-- 各ページのコンテンツ -->
-      </main>
+  <% flash.each do |type, message| %>
+    <div class="flash-<%= type %>"><%= message %></div>
+  <% end %>
 
-      <footer class="site-footer">
+  <%= yield %>
+</main>
+
+     <footer class="site-footer">
         <div class="footer-links">
           <a href="/terms">利用規約</a>
           <span>|</span>
