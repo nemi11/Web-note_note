@@ -1,3 +1,2 @@
-// app/javascript/application.js
 import "@hotwired/turbo-rails"
-import "controllers"
+import "controllers"   // index.js を Importmap 経由で呼ぶ

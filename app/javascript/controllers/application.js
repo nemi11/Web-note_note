@@ -1,5 +1,5 @@
 import { Application } from "@hotwired/stimulus"
-import CarouselController from "./controllers/carousel_controller"
+import CarouselController from "controllers/carousel_controller"
 
 const application = Application.start()
 

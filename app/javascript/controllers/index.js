@@ -1,6 +1,7 @@
-// app/javascript/controllers/index.js
-import { application } from "./application"
+import { application } from "controllers/application"
 
-// この1行が大事
-import CarouselController from "./carousel_controller"
+import CarouselController from "controllers/carousel_controller"
+import MenuController from "controllers/menu_controller"
+
 application.register("carousel", CarouselController)
+application.register("menu", MenuController)
