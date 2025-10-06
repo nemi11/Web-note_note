@@ -1,0 +1,35 @@
+<!-- app/views/layouts/_menu.html.erb -->
+<div data-controller="menu" class="menu-wrapper">
+  <!-- トグルボタン -->
+  <button type="button" class="menu-button" data-action="click->menu#toggle" aria-expanded="false" aria-controls="main-menu">
+    <!-- アイコンを好きなのに差し替えてOK -->
+    ☰
+  </button>
+
+  <!-- メニュー本体（非表示がデフォルト） -->
+  <div id="main-menu" data-menu-target="menu" class="menu-content" role="menu" aria-hidden="true">
+    <%# --- ログイン判定: current_user を使ってるならそれで。無ければ session[:user_id] などに置き換えて --- %>
+    <% if defined?(current_user) && current_user.present? %>
+      <%= link_to "ノート作成", new_note_path, class: "menu-item", role: "menuitem" %>
+      <%= link_to "マイページ", user_path(current_user), class: "menu-item", role: "menuitem" %>
+      <%= link_to "マイノート / お気に入り", my_notes_path, class: "menu-item", role: "menuitem" %>
+      <%= link_to "ログアウト", logout_path, method: :delete, class: "menu-item", role: "menuitem" %>
+    <% else %>
+      <!-- 非ログイン時：ホバーで「ログインすると使えます」を表示 -->
+      <div class="menu-item" data-action="mouseenter->menu#showTooltip mouseleave->menu#hideTooltip" role="menuitem">
+        <%= link_to "ノート作成", login_path, class: "menu-link" %>
+        <span class="tooltip hidden">ログインすると使えます</span>
+      </div>
+
+      <div class="menu-item" data-action="mouseenter->menu#showTooltip mouseleave->menu#hideTooltip" role="menuitem">
+        <%= link_to "マイページ", login_path, class: "menu-link" %>
+        <span class="tooltip hidden">ログインすると使えます</span>
+      </div>
+
+      <div class="menu-item" data-action="mouseenter->menu#showTooltip mouseleave->menu#hideTooltip" role="menuitem">
+        <%= link_to "マイノート / お気に入り", login_path, class: "menu-link" %>
+        <span class="tooltip hidden">ログインすると使えます</span>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+<div data-controller="menu" class="relative inline-block text-left">
+  <!-- メニューアイコン -->
+  <div
+    data-action="mouseenter->menu#show mouseleave->menu#hide"
+    class="p-2 cursor-pointer select-none"
+  >
+    ☰
+  </div>
+
+  <!-- メニュー内容 -->
+  <div
+    data-menu-target="menu"
+    class="absolute right-0 mt-2 w-56 bg-white border border-gray-300 rounded-lg shadow-lg hidden"
+    data-action="mouseleave->menu#hide"
+  >
+    <ul class="flex flex-col text-gray-700">
+
+      <% if user_signed_in? %>
+        <li class="hover:bg-gray-100 px-4 py-2 cursor-pointer">ノート作成</li>
+        <li class="hover:bg-gray-100 px-4 py-2 cursor-pointer">マイページ</li>
+        <li class="hover:bg-gray-100 px-4 py-2 cursor-pointer">マイノート / お気に入り</li>
+        <li class="hover:bg-gray-100 px-4 py-2 cursor-pointer">ログアウト</li>
+
+      <% else %>
+        <% ["ノート作成", "マイページ", "マイノート / お気に入り"].each do |item| %>
+          <li
+            class="relative hover:bg-gray-100 px-4 py-2 cursor-pointer"
+            data-action="mouseenter->menu#showTooltip mouseleave->menu#hideTooltip"
+          >
+            <%= item %>
+            <span
+              data-menu-target="tooltip"
+              class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 px-2 py-1 bg-gray-800 text-white text-xs rounded-md whitespace-nowrap"
+            >
+              ログインすると使えます
+            </span>
+          </li>
+        <% end %>
+      <% end %>
+
+    </ul>
+  </div>
+</div>
