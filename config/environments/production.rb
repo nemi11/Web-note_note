@@ -98,5 +98,5 @@ Rails.application.configure do
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
   # config/environments/production.rb
   # config/environments/production.rb
-  config.assets.precompile += %w( controllers/carousel_controller.js controllers/index.js )
+  config.assets.precompile += %w( application.js controllers/carousel_controller.js controllers/index.js )
 end

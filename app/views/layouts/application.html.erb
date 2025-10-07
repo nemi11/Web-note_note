@@ -10,6 +10,7 @@
   
     <!-- ページごとの追加 CSS を差し込む -->
     <%= yield :page_css %>
+    <%= javascript_include_tag "application", type: "module", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
@@ -32,7 +33,7 @@
           <i class="fa-solid fa-bell"></i>
           <i class="fa-solid fa-heart"></i>
           <div class="menu-icon">
-            <%= render "layouts/menu" %>
+           <%= render "layouts/menu" %>
           </div>
         </div>
       </header>

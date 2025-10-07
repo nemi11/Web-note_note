@@ -2,8 +2,12 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["menu"]
+  static targets = ["menu", "tooltip"]
 
+  initialize() {
+  console.log("menu initialized", this.menuTarget)
+  }
+  
   connect() {
     // outside click 用ハンドラを bind して保管
     this._outsideClickHandler = this._outsideClick.bind(this)
