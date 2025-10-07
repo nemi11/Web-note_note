@@ -21,6 +21,6 @@ Rails.application.routes.draw do
   get 'notes/mine', to: 'notes#mine', as: 'my_notes'
 
   resources :users, only: %i[new create show]
-  resources :notes, only: [:new, :create]
-
+  resources :notes, only: [:new, :create, :index, :show]
+  root "home#index" # メインページ
 end
