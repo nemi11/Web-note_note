@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'home/index'
   get 'pages/home'
   root 'pages#home'
+  devise_for :users
   
   # ログイン関連
   get  "login",  to: "sessions#new"     # ログイン画面
@@ -22,5 +23,5 @@ Rails.application.routes.draw do
 
   resources :users, only: %i[new create show]
   resources :notes, only: [:new, :create, :index, :show]
-  root "home#index" # メインページ
+  
 end

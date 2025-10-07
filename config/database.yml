@@ -6,6 +6,14 @@ default: &default
   password: password
   host: <%= ENV['DATABASE_HOST'] || 'localhost' %>
 
+development:
+  <<: *default
+  database: myapp_development
+
+test:
+  <<: *default
+  database: myapp_test
+
 production:
   <<: *default
   url: <%= ENV['DATABASE_URL'] %>

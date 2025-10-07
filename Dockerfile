@@ -2,8 +2,10 @@
 ARG RUBY_VERSION=3.2.8
 FROM ruby:$RUBY_VERSION-slim as base
 
-WORKDIR /app
+# 作業ディレクトリを /rails に設定
+WORKDIR /rails
 
+# Rails環境変数
 ENV RAILS_ENV=production \
     BUNDLE_PATH=/usr/local/bundle \
     BUNDLE_WITHOUT="development test"
@@ -11,6 +13,7 @@ ENV RAILS_ENV=production \
 # ---- Build stage ----
 FROM base as build
 
+# 必要パッケージのインストール
 RUN apt-get update -qq && \
     apt-get install -y --no-install-recommends \
       build-essential libpq-dev git curl pkg-config \
@@ -18,14 +21,14 @@ RUN apt-get update -qq && \
       libxml2-dev libxslt1-dev libvips-dev && \
     rm -rf /var/lib/apt/lists/*
 
-# 👇 ここを追加！Gemの保存先に権限を与える
-RUN mkdir -p /usr/local/bundle && \
-    chown -R nobody:nogroup /usr/local/bundle
-
+# Gemfileコピー & インストール
 COPY Gemfile Gemfile.lock ./
 RUN bundle install
 
+# アプリケーションコピー
 COPY . .
+
+# bootsnap と assets precompile
 RUN bundle exec bootsnap precompile --gemfile
 RUN SECRET_KEY_BASE_DUMMY=1 DATABASE_URL=postgres://myapp:password@localhost/myapp_production \
     bin/rails assets:precompile
@@ -33,16 +36,20 @@ RUN SECRET_KEY_BASE_DUMMY=1 DATABASE_URL=postgres://myapp:password@localhost/mya
 # ---- Runtime stage ----
 FROM base as runtime
 
+# 実行に必要なパッケージだけインストール
 RUN apt-get update -qq && \
     apt-get install -y --no-install-recommends curl postgresql-client libvips && \
     rm -rf /var/lib/apt/lists/*
 
+# build stage から必要なものをコピー
 COPY --from=build /usr/local/bundle /usr/local/bundle
-COPY --from=build /app /app
+COPY --from=build /rails /rails
 
-USER nobody:nogroup
-WORKDIR /app
+# root のまま実行
+WORKDIR /rails
 
+# ポート設定
 EXPOSE 3000
-CMD ["bin/rails", "server", "-b", "0.0.0.0"]
 
+# Rails サーバー起動
+CMD ["bin/rails", "server", "-b", "0.0.0.0"]
