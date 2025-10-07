@@ -1,0 +1,10 @@
+<h1>English Note Hubへようこそ！</h1>
+
+<% if current_user %>
+  <!-- ログイン後だけ表示される -->
+  <%= link_to "ノートを作成する", new_note_path, class: "btn btn-primary" %>
+<% else %>
+  <!-- ログイン前に表示される -->
+  <p>ノート作成にはログインが必要です。</p>
+  <%= link_to "ログイン", login_path, class: "btn btn-secondary" %>
+<% end %>

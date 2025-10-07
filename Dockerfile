@@ -18,6 +18,10 @@ RUN apt-get update -qq && \
       libxml2-dev libxslt1-dev libvips-dev && \
     rm -rf /var/lib/apt/lists/*
 
+# 👇 ここを追加！Gemの保存先に権限を与える
+RUN mkdir -p /usr/local/bundle && \
+    chown -R nobody:nogroup /usr/local/bundle
+
 COPY Gemfile Gemfile.lock ./
 RUN bundle install
 
