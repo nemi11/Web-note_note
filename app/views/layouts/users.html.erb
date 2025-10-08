@@ -27,7 +27,7 @@
     <!-- register-header を追加 -->
     <header class="register-header">
       <div class="header-center">
-        <%= link_to "Web Note", root_path, class: "logo" %>
+        <%= link_to "Web Note", user_signed_in? ? authenticated_root_path : unauthenticated_root_path, class: "logo" %>
       </div>
     </header>
 

@@ -1,0 +1,58 @@
+<% resource ||= User.new %>
+<% devise_mapping ||= Devise.mappings[:user] %>
+<% resource_name ||= :user %>
+
+<% content_for :page_css do %>
+  <%= stylesheet_link_tag "users", "data-turbo-track": "reload" %>
+<% end %>
+
+<main class="register-page">
+  <!-- フラッシュメッセージをフォーム幅に合わせる -->
+  <% if flash[:notice] %>
+    <div class="flash-notice"><%= flash[:notice] %></div>
+  <% end %>
+
+  <% if flash[:alert] %>
+    <div class="flash-alert"><%= flash[:alert] %></div>
+  <% end %>
+
+  <h1>登録</h1>
+
+  <%= form_with model: @user, url: root_path, class: "register-form" do |f| %>
+    <div class="form-group <%= 'error' if @user.errors[:name].any? %>">
+  <%= f.label :name, "名前(ニックネーム)" %><br>
+  <%= f.text_field :name %>
+  <% if @user.errors[:name].any? %>
+    <p class="error-message"><%= @user.errors[:name].first %></p>
+  <% end %>
+</div>
+
+    <div class="form-group <%= 'error' if @user.errors[:email].any? %>">
+  <%= f.label :email, "メールアドレス" %><br>
+  <%= f.email_field :email %>
+  <% if @user.errors[:email].any? %>
+    <p class="error-message"><%= @user.errors[:email].first %></p>
+  <% end %>
+</div>
+
+   <div class="form-group <%= 'error' if @user.errors[:password].any? %>">
+  <%= f.label :password, "パスワード" %><br>
+  <%= f.password_field :password %>
+  <% if @user.errors[:password].any? %>
+    <p class="error-message"><%= @user.errors[:password].first %></p>
+  <% end %>
+</div>
+
+    <div class="form-group <%= 'error' if @user.errors[:password_confirmation].any? %>">
+  <%= f.label :password_confirmation, "パスワード確認" %><br>
+  <%= f.password_field :password_confirmation %>
+  <% if @user.errors[:password_confirmation].any? %>
+    <p class="error-message"><%= @user.errors[:password_confirmation].first %></p>
+  <% end %>
+</div>
+
+    <div class="form-group">
+      <%= f.submit "登録する", class: "submit-button" %>
+    </div>
+  <% end %>
+</main>

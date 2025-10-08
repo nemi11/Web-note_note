@@ -5,18 +5,23 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <!-- 全ページ共通 CSS -->
+    <!-- 共通 CSS -->
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-  
-    <!-- ページごとの追加 CSS を差し込む -->
+
+    <!-- ページ固有 CSS -->
     <%= yield :page_css %>
+
+    <!-- 共通 JS -->
     <%= javascript_include_tag "application", type: "module", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
+    <!-- ページ固有 JS -->
+    <%= yield :page_js %>
   </head>
 
   <body>
-     <p class="notice"><%= notice %></p>
-     <p class="alert"><%= alert %></p>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
 
     <div class="page-wrapper">
       <header>
@@ -31,26 +36,32 @@
         </div>
         <div class="header-light">
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-          <a href="/signup" class="signup-link">会員登録</a>
-          <a href="/login" class="login-link">ログイン</a>
-          <i class="fa-solid fa-bell"></i>
-          <i class="fa-solid fa-heart"></i>
-          <div class="menu-icon">
-           <%= render "layouts/menu" %>
-           <%= link_to "ノート作成", new_note_path, class: "btn btn-primary" %>
-          </div>
+          <% if user_signed_in? %>
+            <i class="fa-solid fa-bell"></i>
+            <i class="fa-solid fa-heart"></i>
+            <div class="menu-icon">
+              <%= render "layouts/menu" %>
+              <%= link_to "ノート作成", new_note_path, class: "btn btn-primary" %>
+              <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+            </div>
+          <% else %>
+            <% if defined?(custom_signup_path) %>
+             <%= link_to "会員登録", custom_signup_path %>
+            <% end %>
+            <%= link_to "ログイン", login_path %>
+          <% end %>
         </div>
       </header>
 
       <main>
-  <% flash.each do |type, message| %>
-    <div class="flash-<%= type %>"><%= message %></div>
-  <% end %>
+        <% flash.each do |type, message| %>
+          <div class="flash-<%= type %>"><%= message %></div>
+        <% end %>
 
-  <%= yield %>
-</main>
+        <%= yield %> <!-- ページ固有コンテンツ -->
+      </main>
 
-     <footer class="site-footer">
+      <footer class="site-footer">
         <div class="footer-links">
           <a href="/terms">利用規約</a>
           <span>|</span>

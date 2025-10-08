@@ -1,10 +1,34 @@
-<h1>English Note Hubへようこそ！</h1>
+<!-- app/views/home/index.html.erb -->
 
-<% if current_user %>
-  <!-- ログイン後だけ表示される -->
-  <%= link_to "ノートを作成する", new_note_path, class: "btn btn-primary" %>
-<% else %>
-  <!-- ログイン前に表示される -->
-  <p>ノート作成にはログインが必要です。</p>
-  <%= link_to "ログイン", login_path, class: "btn btn-secondary" %>
+<% content_for :page_css do %>
+  <%= stylesheet_link_tag "home", "data-turbo-track": "reload" %>
 <% end %>
+
+<div class="main-content">
+  <h2>Welcome to Web Note</h2>
+
+  <!-- カルーセル -->
+  <div data-controller="carousel" class="carousel-container">
+  <button class="prev" data-action="click->carousel#prevSlide">←</button>
+
+  <div data-carousel-target="slides" class="slides-wrapper">
+    <div class="slide">Slide 1</div>
+    <div class="slide">Slide 2</div>
+    <div class="slide">Slide 3</div>
+    <div class="slide">Slide 4</div>
+    <div class="slide">Slide 5</div>
+  </div>
+
+  <button class="next" data-action="click->carousel#nextSlide">→</button>
+
+  <div data-carousel-target="dots" class="dots">
+    <span class="dot" data-index="0" data-action="click->carousel#goToSlide"></span>
+    <span class="dot" data-index="1" data-action="click->carousel#goToSlide"></span>
+    <span class="dot" data-index="2" data-action="click->carousel#goToSlide"></span>
+    <span class="dot" data-index="3" data-action="click->carousel#goToSlide"></span>
+    <span class="dot" data-index="4" data-action="click->carousel#goToSlide"></span>
+  </div>
+</div>
+
+  <!-- ここに他のコンテンツも追加可能 -->
+</div>

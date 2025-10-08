@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Devise Layout</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= yield :page_css %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+  </head>
+
+  <body>
+    <header class="login-header">
+      <div class="logo">
+        <%= link_to "Web Note", root_path, style: "text-decoration: none; color: white;" %>
+      </div>
+    </header>
+
+    <%= yield %>
+  </body>
+</html>

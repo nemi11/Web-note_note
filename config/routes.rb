@@ -1,27 +1,36 @@
-# frozen_string_literal: true
-
 Rails.application.routes.draw do
-  get 'notes/new'
-  get 'notes/create'
+  # Deviseのルート（1回だけ！）
+  devise_for :users
+
+  devise_scope :user do
+    get "signup", to: "devise/registrations#new", as: :custom_signup
+    get "login", to: "devise/sessions#new", as: :login
+    post "login", to: "devise/sessions#create"
+    delete "logout", to: "devise/sessions#destroy", as: :logout
+  end
+
+  # ログイン済みユーザー向けのトップページ
+  authenticated :user do
+    root to: 'dashboard#index', as: :authenticated_root
+  end
+
+  # 未ログインユーザー向けのトップページ
+  unauthenticated do
+    root to: 'home#index', as: :unauthenticated_root
+  end
+
+  # 最後にこれを追加！
+  root to: 'home#index'
+
+  # その他のページ
+  get 'dashboard/index'
   get 'home/index'
   get 'pages/home'
-  root 'pages#home'
-  devise_for :users
-  
-  # ログイン関連
-  get  "login",  to: "sessions#new"     # ログイン画面
-  post "login",  to: "sessions#create"  # ログイン処理
-  delete "logout", to: "sessions#destroy" # ログアウト
-  get "logout", to: "sessions#destroy"
 
-  # 会員登録関連（Userコントローラ想定）
-  get 'signup', to: 'users#new'
-  post 'signup', to: 'users#create'
-  
-  #　マイノート
-  get 'notes/mine', to: 'notes#mine', as: 'my_notes'
-
-  resources :users, only: %i[new create show]
+  # ノート関連
+  get 'notes/mine', to: 'notes#mine', as: :my_notes
   resources :notes, only: [:new, :create, :index, :show]
-  
+
+  # ユーザー関連（Deviseと競合しないように注意）
+  resources :users, only: [:show]
 end

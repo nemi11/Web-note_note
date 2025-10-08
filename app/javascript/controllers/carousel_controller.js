@@ -18,11 +18,6 @@ cloneSlides() {
   this.slidesTarget.insertBefore(last, slides[0])
   this.currentIndex = 1
   }
-  
-  nextSlide() {
-    this.currentIndex = (this.currentIndex + 1) % this.slidesTarget.children.length
-    this.updateSlide()
-  }
 
   prevSlide() {
     this.currentIndex = (this.currentIndex - 1 + this.slidesTarget.children.length) % this.slidesTarget.children.length

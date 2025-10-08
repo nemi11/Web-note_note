@@ -1,5 +1,6 @@
 # app/controllers/notes_controller.rb
 class NotesController < ApplicationController
+
   def new
     @note = Note.new
   end

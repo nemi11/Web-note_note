@@ -6,19 +6,16 @@
   </button>
 
   <!-- メニュー本体 -->
-  <div id="main-menu" data-menu-target="menu" class="menu-content hidden" role="menu" aria-hidden="true">
-    <% if defined?(current_user) && current_user.present? %>
-      <%= link_to "ノート作成", new_note_path, class: "menu-item", role: "menuitem" %>
-      <%= link_to "マイページ", user_path(current_user), class: "menu-item", role: "menuitem" %>
-      <%= link_to "マイノート / お気に入り", my_notes_path, class: "menu-item", role: "menuitem" %>
-      <%= link_to "ログアウト", logout_path, data: { turbo_method: :delete }, class: "menu-item", role: "menuitem" %>
+ <% ["ノート作成", "マイページ", "マイノート / お気に入り"].each do |item| %>
+  <div class="menu-item" data-action="mouseenter->menu#showTooltip mouseleave->menu#hideTooltip" role="menuitem">
+    <% if user_signed_in? %>
+      <%# ログイン済みなら本来のリンクに置き換える %>
+      <%= link_to item, "#", class: "menu-link" %>
     <% else %>
-      <% ["ノート作成", "マイページ", "マイノート / お気に入り"].each do |item| %>
-        <div class="menu-item" data-action="mouseenter->menu#showTooltip mouseleave->menu#hideTooltip" role="menuitem">
-          <%= link_to item, login_path, class: "menu-link"%>
-          <span class="tooltip hidden">ログインすると使えます</span>
-        </div>
-      <% end %>
+      <%# 未ログインなら Devise のログインページに誘導 %>
+      <%= link_to item, new_user_session_path, class: "menu-link" %>
     <% end %>
+    <span class="tooltip hidden">ログインすると使えます</span>
   </div>
+  <% end %>
 </div>

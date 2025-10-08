@@ -1,9 +1,9 @@
-import { application } from "controllers/application"
+import { Application } from "@hotwired/stimulus"
+import MenuController from "./menu_controller"
+import CarouselController from "./carousel_controller"
 
-import CarouselController from "controllers/carousel_controller"
-import MenuController from "controllers/menu_controller"
-// index.js
-import "controllers/application"
-
-application.register("carousel", CarouselController)
+const application = Application.start()
 application.register("menu", MenuController)
+application.register("carousel", CarouselController)
+
+export { application }
