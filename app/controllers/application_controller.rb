@@ -4,9 +4,9 @@ class ApplicationController < ActionController::Base
     root_path
   end
 
-  # ログイン成功後にトップページに戻る
+  # ログイン成功後
   def after_sign_in_path_for(resource)
-    root_path
+    dashboard_index_path
   end
 
   # ログアウト後にトップページに戻る

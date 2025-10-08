@@ -32,5 +32,6 @@ Rails.application.routes.draw do
   # ----------------------
   # ユーザー関連
   # ----------------------
-  resources :users, only: [:show]
+  resources :users, only: [:show, ]  # index を追加
+
 end
