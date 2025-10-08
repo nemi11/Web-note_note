@@ -1,21 +1,32 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Devise Layout</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= yield :page_css %>
-    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
-  </head>
+<head>
+  <title>Web Note - Login</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-  <body>
-    <header class="login-header">
-      <div class="logo">
-        <%= link_to "Web Note", root_path, style: "text-decoration: none; color: white;" %>
-      </div>
-    </header>
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= stylesheet_link_tag "users", "data-turbo-track": "reload" %> <!-- user.css を読み込む -->
+  <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+  <%= javascript_importmap_tags %>
+  <%= yield :page_css %>
+</head>
 
+<body>
+  <header class="login-header">
+    <div class="logo">
+      <%= link_to "Web Note", root_path, style: "text-decoration: none; color: white;" %>
+    </div>
+  </header>
+
+  <main class="login-main">
+    <!-- フラッシュメッセージ -->
+    <% flash.each do |type, message| %>
+      <div class="flash-<%= type %>"><%= message %></div>
+    <% end %>
+
+    <!-- ページ固有コンテンツ -->
     <%= yield %>
-  </body>
+  </main>
+</body>
 </html>

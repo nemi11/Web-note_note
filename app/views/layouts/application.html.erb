@@ -20,9 +20,6 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-
     <div class="page-wrapper">
       <header>
         <div class="header-center">
@@ -54,12 +51,13 @@
       </header>
 
       <main>
-        <% flash.each do |type, message| %>
-          <div class="flash-<%= type %>"><%= message %></div>
-        <% end %>
+  <% flash.each do |type, message| %>
+    <div class="flash-<%= type %>"><%= message %></div>
+  <% end %>
 
-        <%= yield %> <!-- ページ固有コンテンツ -->
-      </main>
+  <%= yield %> <!-- ページ固有コンテンツ -->
+</main>
+
 
       <footer class="site-footer">
         <div class="footer-links">

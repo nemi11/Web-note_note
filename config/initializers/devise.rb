@@ -310,4 +310,11 @@ Devise.setup do |config|
   # When set to false, does not sign a user in automatically after their password is
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
+  # Turbo (Hotwire) が Devise のリダイレクトを壊す問題の修正
+  Rails.application.config.to_prepare do
+  Devise::SessionsController.respond_to :html, :turbo_stream
+  Devise::RegistrationsController.respond_to :html, :turbo_stream
+  Devise::PasswordsController.respond_to :html, :turbo_stream
+end
+
 end
