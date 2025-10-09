@@ -2,13 +2,18 @@ Rails.application.routes.draw do
   # ----------------------
   # Deviseのルート
   # ----------------------
-  devise_for :users
+  devise_for :users, controllers: {
+    registrations: "users/registrations",
+    sessions: "users/sessions",
+    passwords: "users/passwords",
+    confirmations: "users/confirmations"
+  }
 
   devise_scope :user do
-    get    "signup", to: "devise/registrations#new",  as: :custom_signup
-    get    "login",  to: "devise/sessions#new",       as: :login
-    post   "login",  to: "devise/sessions#create"
-    delete "logout", to: "devise/sessions#destroy",   as: :logout
+    get    "signup", to: "users/registrations#new",  as: :custom_signup
+    get    "login",  to: "users/sessions#new",       as: :login
+    post   "login",  to: "users/sessions#create"
+    delete "logout", to: "users/sessions#destroy",   as: :logout
   end
 
   # ----------------------
