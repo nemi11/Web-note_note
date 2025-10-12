@@ -1,2 +1,12 @@
 import "@hotwired/turbo-rails"
-import "controllers"   // index.js を Importmap 経由で呼ぶ
+import "controllers"
+import "jquery"
+
+document.addEventListener("turbo:load", () => {
+  // jQueryでメニュー開閉
+  $(".menu-btn").on("click", function() {
+    $(".menu").toggle();
+  });
+
+  // 他のjQueryコードもここに書ける
+});

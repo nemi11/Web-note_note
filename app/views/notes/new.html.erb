@@ -1,18 +1,67 @@
-<!-- app/views/notes/new.html.erb -->
-<%= form_with model: @note, local: true, data: { controller: "note-form" } do |f| %>
-  <%= f.label :title %>
-  <%= f.text_field :title, required: true %>
+<% content_for :hide_layout_parts %>
 
-  <%= f.label :tags %>
-  <%= f.text_field :tags, required: true %>
-
-  <div data-note-form-target="sections">
-    <%= f.fields_for :sections do |section_form| %>
-      <%= render "section_fields", f: section_form %>
-    <% end %>
+<!-- ロゴだけのヘッダー -->
+<header class="login-header header-center">
+  <div class="logo">
+    <%= link_to "Web Note", root_path, style: "text-decoration: none; color: white;" %>
   </div>
+</header>
 
-  <button type="button" data-action="click->note-form#addSection">＋</button>
 
-  <%= f.submit "保存" %>
-<% end %>
+<!-- メインコンテンツ -->
+<main class="note-form-container">
+  <h1>ノート作成</h1>
+
+  <%= form_with(model: @note, local: true) do |form| %>
+    <div class="form-group">
+      <%= form.label :title, "タイトル" %> <span class="required">(必須)</span><br>
+      <%= form.text_field :title, class: "form-control", placeholder: "タイトルを入力" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :tag, "タグ" %> <span class="required">(必須)</span><br>
+      <%= form.text_field :tag, class: "form-control", placeholder: "タグを入力" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :english_sentence, "英文" %> <span class="required">(必須)</span><br>
+      <%= form.text_area :english_sentence, class: "form-control", rows: 3, placeholder: "英文を入力" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :translation, "翻訳" %> <span class="required">(必須)</span><br>
+      <%= form.text_area :translation, class: "form-control", rows: 3, placeholder: "翻訳を入力" %>
+    </div>
+
+    <div id="explanations">
+      <h3>説明文（任意）</h3>
+    </div>
+
+    <button type="button" id="add-explanation" class="add-button">＋ 説明ボックスを追加</button>
+
+    <div class="actions">
+      <%= form.submit "保存する", class: "submit-button" %>
+    </div>
+  <% end %>
+</main>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const addBtn = document.getElementById("add-explanation");
+    const container = document.getElementById("explanations");
+    let count = 0;
+
+    addBtn.addEventListener("click", () => {
+      count++;
+      const box = document.createElement("div");
+      box.classList.add("explanation-box");
+      box.innerHTML = `
+        <h4>説明ボックス ${count}</h4>
+        <textarea name="note[explanations][]" rows="3" placeholder="説明文を入力（Markdown対応）"></textarea>
+        <textarea name="note[extra_english][]" rows="2" placeholder="英文を入力（任意）"></textarea>
+        <textarea name="note[extra_translation][]" rows="2" placeholder="翻訳を入力（任意）"></textarea>
+      `;
+      container.appendChild(box);
+    });
+  });
+</script>

@@ -12,7 +12,6 @@
     <%= yield :page_css %>
 
     <!-- 共通 JS -->
-    <%= javascript_include_tag "application", type: "module", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
 
     <!-- ページ固有 JS -->
@@ -21,52 +20,57 @@
 
   <body>
     <div class="page-wrapper">
-      <header>
-        <div class="header-center">
-          <div class="search-group">
-            <div class="logo">Web Note</div>
-            <div class="search-box">
-              <input type="text" placeholder="Search notes...">
-              <button>Search</button>
+
+      <% unless content_for?(:hide_layout_parts) %>
+        <header>
+          <div class="header-center">
+            <div class="search-group">
+              <div class="logo">Web Note</div>
+              <div class="search-box">
+                <input type="text" placeholder="Search notes...">
+                <button>Search</button>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="header-light">
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-          <% if user_signed_in? %>
-            <i class="fa-solid fa-bell"></i>
-            <i class="fa-solid fa-heart"></i>
-            <div class="menu-icon">
-              <%= render "layouts/menu" %>
-              <%= link_to "ノート作成", new_note_path, class: "btn btn-primary" %>
-              <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-            </div>
-          <% else %>
-            <% if defined?(custom_signup_path) %>
-             <%= link_to "会員登録", custom_signup_path %>
+          <div class="header-light">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+            <% if user_signed_in? %>
+              <i class="fa-solid fa-bell"></i>
+              <i class="fa-solid fa-heart"></i>
+              <div class="menu-icon">
+                <%= render "layouts/menu" %>
+                <%= link_to "ノート作成", new_note_path, class: "btn btn-primary" %>
+                <%= link_to 'Logout', destroy_user_session_path, data: { turbo_method: :delete } %>
+              </div>
+            <% else %>
+              <% if defined?(custom_signup_path) %>
+                <%= link_to "会員登録", custom_signup_path %>
+              <% end %>
+              <%= link_to "ログイン", login_path %>
             <% end %>
-            <%= link_to "ログイン", login_path %>
-          <% end %>
-        </div>
-      </header>
+          </div>
+        </header>
+      <% end %>
 
       <main>
-  <% flash.each do |type, message| %>
-    <div class="flash-<%= type %>"><%= message %></div>
-  <% end %>
+        <% flash.each do |type, message| %>
+          <div class="flash-<%= type %>"><%= message %></div>
+        <% end %>
 
-  <%= yield %> <!-- ページ固有コンテンツ -->
-</main>
+        <%= yield %> <!-- ページ固有コンテンツ -->
+      </main>
 
+      <% unless content_for?(:hide_layout_parts) %>
+        <footer class="site-footer">
+          <div class="footer-links">
+            <a href="/terms">利用規約</a>
+            <span>|</span>
+            <a href="/privacy">プライバシーポリシー</a>
+          </div>
+          <p class="copyright">© 2025 Web Note</p>
+        </footer>
+      <% end %>
 
-      <footer class="site-footer">
-        <div class="footer-links">
-          <a href="/terms">利用規約</a>
-          <span>|</span>
-          <a href="/privacy">プライバシーポリシー</a>
-        </div>
-        <p class="copyright">© 2025 Web Note</p>
-      </footer>
     </div>
   </body>
 </html>
