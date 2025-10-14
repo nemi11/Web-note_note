@@ -6,6 +6,7 @@ class NotesController < ApplicationController
   end
 
   def create
+    logger.debug params.inspect  # ここで送信されたパラメータを確認
     @note = Note.new(note_params)
     if @note.save
       redirect_to @note, notice: "ノートを作成しました"
@@ -17,6 +18,12 @@ class NotesController < ApplicationController
   private
 
   def note_params
-    params.require(:note).permit(:title, :content) # カラム名に合わせる
+  params.require(:note).permit(
+    :title, :content,               # もともとのカラム
+    extra_english: [],              # 配列として許可
+    extra_translation: [],
+    explanations: []
+  )
   end
+
 end
