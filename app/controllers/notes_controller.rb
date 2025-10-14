@@ -19,11 +19,13 @@ class NotesController < ApplicationController
 
   def note_params
   params.require(:note).permit(
-    :title, :content,               # もともとのカラム
-    extra_english: [],              # 配列として許可
+    :title, :content,
+    tags: [],  # ← これがないと配列として受け取れない
+    extra_english: [],
     extra_translation: [],
-    explanations: []
+    explanations: [],
+    divider: []
   )
-  end
+ end
 
 end

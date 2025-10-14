@@ -13,6 +13,19 @@
   <h1>ノート作成</h1>
 
   <%= form_with(model: @note, local: true) do |form| %>
+    <!-- タイトル -->
+    <div class="explanation-box">
+      <h4>タイトル</h4>
+      <%= form.text_field :title, placeholder: "ノートのタイトルを入力", required: true %>
+    </div>
+
+    <!-- タグ入力欄 -->
+    <div class="explanation-box" id="tags-container">
+      <h4>タグ</h4>
+      <input type="text" name="note[tags][]" placeholder="タグ1">
+      <button type="button" id="add-tag" class="add-button">＋ タグを追加</button>
+    </div>
+
     <!-- ここに JS で追加する項目も全部入る -->
     <div id="explanations">
       <h3>ノート項目を追加</h3>
@@ -33,7 +46,61 @@
   <% end %>
 </main>
 
-<!-- CSS -->
+<!-- JavaScript -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const container = document.getElementById("explanations");
+
+  function createBox(label, name, rows, placeholder) {
+    const box = document.createElement("div");
+    box.classList.add("explanation-box");
+    box.innerHTML = `
+      <h4>${label}</h4>
+      <textarea name="note[${name}][]" rows="${rows}" placeholder="${placeholder}" required></textarea>
+      <button type="button" class="remove-button">✕ 削除</button>
+    `;
+    box.querySelector(".remove-button").addEventListener("click", () => box.remove());
+    container.appendChild(box);
+  }
+
+  function createDivider() {
+    const box = document.createElement("div");
+    box.classList.add("divider-box");
+    box.innerHTML = `
+      <hr>
+      <input type="hidden" name="note[divider][]" value="1">
+      <button type="button" class="remove-button">✕ 削除</button>
+    `;
+    box.querySelector(".remove-button").addEventListener("click", () => box.remove());
+    container.appendChild(box);
+  }
+
+  document.getElementById("add-extra-english").addEventListener("click", () => {
+    createBox("英文", "extra_english", 2, "英文を入力");
+  });
+
+  document.getElementById("add-extra-translation").addEventListener("click", () => {
+    createBox("翻訳", "extra_translation", 2, "翻訳を入力");
+  });
+
+  document.getElementById("add-explanation").addEventListener("click", () => {
+    createBox("説明文", "explanations", 3, "説明文を入力（Markdown対応）");
+  });
+
+  document.getElementById("add-divider").addEventListener("click", () => createDivider());
+
+  // タグ追加ボタンの動作
+  document.getElementById("add-tag").addEventListener("click", () => {
+    const input = document.createElement("input");
+    input.type = "text";
+    input.name = "note[tags][]";
+    input.placeholder = "タグを追加";
+    document.getElementById("tags-container").appendChild(input);
+  });
+});
+</script>
+
+<!-- CSS（そのままでOK） -->
 <style>
 .note-form-container {
   max-width: 720px;
@@ -48,7 +115,10 @@
 .note-form-container .guide-text { font-size:0.95em; color:#666; margin-bottom:1.2em; text-align:center; }
 .note-form-container .explanation-box { margin-bottom:1.2em; padding:1em 1.2em; border:1px solid #ddd; border-radius:10px; background:#fafafa; position:relative; }
 .note-form-container .explanation-box h4 { margin-bottom:0.6em; font-size:1rem; color:#333; }
-.note-form-container .explanation-box textarea { width:100%; padding:0.6em; border:1px solid #ccc; border-radius:6px; font-size:0.95em; font-family:inherit; resize:vertical; }
+.note-form-container .explanation-box textarea,
+.note-form-container .explanation-box input[type="text"] {
+  width:100%; padding:0.6em; border:1px solid #ccc; border-radius:6px; font-size:0.95em; font-family:inherit; resize:vertical;
+}
 .note-form-container .divider-box { margin:2em 0; position:relative; }
 .note-form-container .divider-box hr { border:none; border-top:1px solid #ccc; }
 .note-form-container .remove-button { position:absolute; top:6px; right:10px; background:#111; color:white; border:none; padding:0.4em 0.8em; border-radius:5px; font-size:0.8em; cursor:pointer; transition:0.2s; }
@@ -59,59 +129,3 @@
 .note-form-container .submit-button { display:block; margin:2em auto 0; padding:0.8em 2em; background:#000; color:#fff; border:none; border-radius:8px; font-size:1.05em; font-weight:600; cursor:pointer; transition:0.2s; }
 .note-form-container .submit-button:hover { background:#222; transform:translateY(-2px); }
 </style>
-
-<!-- JavaScript -->
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  // フォーム内の追加コンテナを取得
-  const container = document.getElementById("explanations");
-
-  // 汎用的な入力ボックスを作成
-  function createBox(label, name, rows, placeholder) {
-    const box = document.createElement("div");
-    box.classList.add("explanation-box");
-
-    // name 属性を必ず note[...] にする
-    box.innerHTML = `
-      <h4>${label}</h4>
-      <textarea name="note[${name}][]" rows="${rows}" placeholder="${placeholder}" required></textarea>
-      <button type="button" class="remove-button">✕ 削除</button>
-    `;
-
-    // 削除ボタンの動作
-    const removeBtn = box.querySelector(".remove-button");
-    removeBtn.addEventListener("click", () => box.remove());
-
-    // container に追加
-    container.appendChild(box);
-  }
-
-  // 仕切り線ボックスを作成
-  function createDivider() {
-    const box = document.createElement("div");
-    box.classList.add("divider-box");
-    box.innerHTML = `
-      <hr>
-      <input type="hidden" name="note[divider][]" value="1">
-      <button type="button" class="remove-button">✕ 削除</button>
-    `;
-    box.querySelector(".remove-button").addEventListener("click", () => box.remove());
-    container.appendChild(box);
-  }
-
-  // 各追加ボタンのイベント設定
-  document.getElementById("add-extra-english").addEventListener("click", () => {
-    createBox("英文", "extra_english", 2, "英文を入力");
-  });
-
-  document.getElementById("add-extra-translation").addEventListener("click", () => {
-    createBox("extra_translation", "extra_translation", 2, "翻訳を入力");
-  });
-
-  document.getElementById("add-explanation").addEventListener("click", () => {
-    createBox("説明文", "explanations", 3, "説明文を入力（Markdown対応）");
-  });
-
-  document.getElementById("add-divider").addEventListener("click", () => createDivider());
-});
-</script>
