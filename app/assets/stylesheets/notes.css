@@ -1,12 +1,120 @@
-.slider {
-  width: 80%;
-  margin: 40px auto;
-}
+.note-form-container {
+  max-width: 720px;
+  margin: 3em auto;
+  padding: 2.5em;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  font-family: "Hiragino Sans", "Noto Sans JP", sans-serif;
 
-.note-slide {
-  background-color: #f0f0f0;
-  padding: 20px;
-  border-radius: 8px;
-  text-align: center;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  h1 {
+    text-align: center;
+    margin-bottom: 1.5em;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #222;
+  }
+
+  .guide-text {
+    font-size: 0.95em;
+    color: #666;
+    margin-bottom: 1.2em;
+    text-align: center;
+  }
+
+  .explanation-box {
+    margin-bottom: 1.2em;
+    padding: 1em 1.2em;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #fafafa;
+    position: relative;
+
+    h4 {
+      margin-bottom: 0.6em;
+      font-size: 1rem;
+      color: #333;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 0.6em;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 0.95em;
+      font-family: inherit;
+      resize: vertical;
+    }
+  }
+
+  .divider-box {
+    margin: 2em 0;
+    position: relative;
+
+    hr {
+      border: none;
+      border-top: 1px solid #ccc;
+    }
+  }
+
+  .remove-button {
+    position: absolute;
+    top: 6px;
+    right: 10px;
+    background-color: #111;
+    color: white;
+    border: none;
+    padding: 0.4em 0.8em;
+    border-radius: 5px;
+    font-size: 0.8em;
+    cursor: pointer;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: #333;
+    }
+  }
+
+  .optional-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.8em;
+    margin: 1.8em 0;
+  }
+
+  .add-button {
+    padding: 0.6em 1.2em;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.95em;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: #333;
+      transform: translateY(-2px);
+    }
+  }
+
+  .submit-button {
+    display: block;
+    margin: 2em auto 0;
+    padding: 0.8em 2em;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.05em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: #222;
+      transform: translateY(-2px);
+    }
+  }
 }

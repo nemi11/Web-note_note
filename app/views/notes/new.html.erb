@@ -1,43 +1,30 @@
-<% content_for :hide_layout_parts %>
+<% provide :hide_layout_parts, true %>
 
 <!-- ロゴだけのヘッダー -->
 <header class="login-header header-center">
+  <%= stylesheet_link_tag "notes", "data-turbo-track": "reload" %>
   <div class="logo">
     <%= link_to "Web Note", root_path, style: "text-decoration: none; color: white;" %>
   </div>
 </header>
-
 
 <!-- メインコンテンツ -->
 <main class="note-form-container">
   <h1>ノート作成</h1>
 
   <%= form_with(model: @note, local: true) do |form| %>
-    <div class="form-group">
-      <%= form.label :title, "タイトル" %> <span class="required">(必須)</span><br>
-      <%= form.text_field :title, class: "form-control", placeholder: "タイトルを入力" %>
-    </div>
-
-    <div class="form-group">
-      <%= form.label :tag, "タグ" %> <span class="required">(必須)</span><br>
-      <%= form.text_field :tag, class: "form-control", placeholder: "タグを入力" %>
-    </div>
-
-    <div class="form-group">
-      <%= form.label :english_sentence, "英文" %> <span class="required">(必須)</span><br>
-      <%= form.text_area :english_sentence, class: "form-control", rows: 3, placeholder: "英文を入力" %>
-    </div>
-
-    <div class="form-group">
-      <%= form.label :translation, "翻訳" %> <span class="required">(必須)</span><br>
-      <%= form.text_area :translation, class: "form-control", rows: 3, placeholder: "翻訳を入力" %>
-    </div>
-
     <div id="explanations">
-      <h3>説明文（任意）</h3>
+      <h3>ノート項目を追加</h3>
+      <p class="guide-text">＋ボタンを押して項目を追加してください</p>
     </div>
 
-    <button type="button" id="add-explanation" class="add-button">＋ 説明ボックスを追加</button>
+    <!-- 自由追加ボタン -->
+    <div class="optional-buttons">
+      <button type="button" id="add-extra-english" class="add-button">＋ 英文を追加</button>
+      <button type="button" id="add-extra-translation" class="add-button">＋ 翻訳を追加</button>
+      <button type="button" id="add-explanation" class="add-button">＋ 説明を追加</button>
+      <button type="button" id="add-divider" class="add-button">＋ 仕切り線を追加</button>
+    </div>
 
     <div class="actions">
       <%= form.submit "保存する", class: "submit-button" %>
@@ -45,23 +32,52 @@
   <% end %>
 </main>
 
+<!-- JavaScript -->
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    const addBtn = document.getElementById("add-explanation");
     const container = document.getElementById("explanations");
-    let count = 0;
 
-    addBtn.addEventListener("click", () => {
-      count++;
+    function createBox(label, name, rows, placeholder) {
       const box = document.createElement("div");
       box.classList.add("explanation-box");
       box.innerHTML = `
-        <h4>説明ボックス ${count}</h4>
-        <textarea name="note[explanations][]" rows="3" placeholder="説明文を入力（Markdown対応）"></textarea>
-        <textarea name="note[extra_english][]" rows="2" placeholder="英文を入力（任意）"></textarea>
-        <textarea name="note[extra_translation][]" rows="2" placeholder="翻訳を入力（任意）"></textarea>
+        <h4>${label}</h4>
+        <textarea name="note[${name}][]" rows="${rows}" placeholder="${placeholder}"></textarea>
+        <button type="button" class="remove-button">✕ 削除</button>
       `;
+      box.querySelector(".remove-button").addEventListener("click", () => {
+        box.remove();
+      });
       container.appendChild(box);
+    }
+
+    function createDivider() {
+      const box = document.createElement("div");
+      box.classList.add("divider-box");
+      box.innerHTML = `
+        <hr>
+        <button type="button" class="remove-button">✕ 削除</button>
+      `;
+      box.querySelector(".remove-button").addEventListener("click", () => {
+        box.remove();
+      });
+      container.appendChild(box);
+    }
+
+    document.getElementById("add-extra-english").addEventListener("click", () => {
+      createBox("英文", "extra_english", 2, "英文を入力");
+    });
+
+    document.getElementById("add-extra-translation").addEventListener("click", () => {
+      createBox("翻訳", "extra_translation", 2, "翻訳を入力");
+    });
+
+    document.getElementById("add-explanation").addEventListener("click", () => {
+      createBox("説明文", "explanations", 3, "説明文を入力（Markdown対応）");
+    });
+
+    document.getElementById("add-divider").addEventListener("click", () => {
+      createDivider();
     });
   });
 </script>
