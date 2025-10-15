@@ -1,0 +1,9 @@
+<h1><%= @note.title %></h1>
+
+<% if @note.content.present? %>
+  <p><%= @note.content %></p>
+<% end %>
+
+<% if @note.tags.present? %>
+  <p>タグ: <%= @note.tags.join(", ") %></p>
+<% end %>

@@ -6,14 +6,18 @@ class NotesController < ApplicationController
   end
 
   def create
-    logger.debug params.inspect  # ここで送信されたパラメータを確認
-    @note = Note.new(note_params)
+    @note = current_user.notes.build(note_params)
     if @note.save
       redirect_to @note, notice: "ノートを作成しました"
     else
       render :new
     end
   end
+
+  def show
+    @note = Note.find(params[:id])
+  end
+
 
   private
 
