@@ -1,8 +1,10 @@
 <% provide :hide_layout_parts, true %>
 
-<!-- ロゴ（application.css に連動） -->
-<header class="logo">
-  <%= link_to "Web Note", root_path, class: "logo-link" %>
+<!-- ロゴ（構造を分離してCSSが正しく効くように） -->
+<header class="logo-header">
+  <div class="logo">
+    <%= link_to "Web Note", root_path, class: "logo-link" %>
+  </div>
 </header>
 
 <main class="search-results">
@@ -23,7 +25,6 @@
       <% end %>
     </ul>
 
-    <!-- ページネーション -->
     <div class="pagination">
       <%= paginate @notes %>
     </div>
@@ -31,3 +32,108 @@
     <p class="no-results">該当するノートは見つかりませんでした。</p>
   <% end %>
 </main>
+
+<!-- ✅ 全体CSS（1ページ完結） -->
+<style>
+  :root {
+    --main-color: #8acde3;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+    background-color: #fefefe;
+  }
+
+  /* ロゴヘッダー（背景・中央揃え） */
+  .logo-header {
+    background-color: var(--main-color);
+    text-align: center;
+    padding: 1em 2em;
+  }
+
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .logo a,
+  .logo-link {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.4em;
+    font-family: "Hiragino Sans", "Noto Sans JP", sans-serif;
+  }
+
+  .search-results {
+    padding: 2em;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .note-list {
+    list-style: none;
+    padding: 0;
+    margin: 2em 0;
+  }
+
+  .note-item {
+    background-color: #f9f9f9;
+    padding: 1em;
+    margin-bottom: 1em;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+
+  .note-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  .note-title {
+    font-size: 1.2em;
+    margin-bottom: 0.5em;
+    color: #333;
+  }
+
+  .note-preview {
+    font-size: 1em;
+    color: #555;
+  }
+
+  .note-tags {
+    font-size: 0.9em;
+    color: #888;
+    margin-top: 0.5em;
+  }
+
+  .no-results {
+    text-align: center;
+    font-size: 1.1em;
+    color: #666;
+  }
+
+  .pagination {
+    text-align: center;
+    margin-top: 2em;
+  }
+
+  .pagination a,
+  .pagination span {
+    display: inline-block;
+    margin: 0 4px;
+    padding: 6px 10px;
+    border-radius: 4px;
+    background-color: #eee;
+    color: #333;
+    text-decoration: none;
+  }
+
+  .pagination .current {
+    background-color: var(--main-color);
+    color: white;
+    font-weight: bold;
+  }
+</style>

@@ -1,9 +1,142 @@
-<h1><%= @note.title %></h1>
+<% provide :hide_layout_parts, true %>
 
-<% if @note.content.present? %>
-  <p><%= @note.content %></p>
-<% end %>
+<!-- ロゴ（application.css に沿った構造） -->
+<header class="logo-header">
+  <div class="logo">
+    <%= link_to "Web Note", root_path, class: "logo-link" %>
+  </div>
+</header>
 
-<% if @note.tags.present? %>
-  <p>タグ: <%= @note.tags.join(", ") %></p>
-<% end %>
+<main class="note-detail">
+  <h1 class="note-title"><%= @note.title %></h1>
+
+  <% if @note.content.present? %>
+    <section class="note-section">
+      <h2>本文</h2>
+      <p><%= simple_format(@note.content) %></p>
+    </section>
+  <% end %>
+
+  <% if @note.tags.reject(&:blank?).any? %>
+    <section class="note-section">
+      <h2>タグ</h2>
+      <p><%= @note.tags.reject(&:blank?).join(", ") %></p>
+    </section>
+  <% end %>
+
+  <% if @note.extra_english.reject(&:blank?).any? %>
+    <section class="note-section">
+      <h2>英単語</h2>
+      <ul>
+        <% @note.extra_english.each do |word| %>
+          <li><%= word %></li>
+        <% end %>
+      </ul>
+    </section>
+  <% end %>
+
+  <% if @note.extra_translation.reject(&:blank?).any? %>
+    <section class="note-section">
+      <h2>訳語</h2>
+      <ul>
+        <% @note.extra_translation.each do |word| %>
+          <li><%= word %></li>
+        <% end %>
+      </ul>
+    </section>
+  <% end %>
+
+  <% if @note.explanations.reject(&:blank?).any? %>
+    <section class="note-section">
+      <h2>解説</h2>
+      <ul>
+        <% @note.explanations.each do |exp| %>
+          <li><%= exp %></li>
+        <% end %>
+      </ul>
+    </section>
+  <% end %>
+
+  <% if @note.divider.to_a.reject(&:blank?).any? %>
+    <section class="note-section">
+      <h2>区切り</h2>
+      <ul>
+        <% @note.divider.each do |div| %>
+          <li><%= div %></li>
+        <% end %>
+      </ul>
+    </section>
+  <% end %>
+</main>
+
+<!-- ✅ CSS（1ページ完結） -->
+<style>
+  :root {
+    --main-color: #8acde3;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+    background-color: #fefefe;
+  }
+
+  .logo-header {
+    background-color: var(--main-color);
+    text-align: center;
+    padding: 1em 2em;
+  }
+
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .logo a,
+  .logo-link {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.4em;
+    font-family: "Hiragino Sans", "Noto Sans JP", sans-serif;
+  }
+
+  .note-detail {
+    max-width: 800px;
+    margin: 2em auto;
+    padding: 0 1em;
+  }
+
+  .note-title {
+    font-size: 2em;
+    margin-bottom: 1em;
+    color: #333;
+    text-align: center;
+  }
+
+  .note-section {
+    margin-bottom: 2em;
+  }
+
+  .note-section h2 {
+    font-size: 1.2em;
+    color: #555;
+    margin-bottom: 0.5em;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0.3em;
+  }
+
+  .note-section p {
+    font-size: 1em;
+    color: #444;
+  }
+
+  .note-section ul {
+    padding-left: 1.2em;
+  }
+
+  .note-section li {
+    margin-bottom: 0.5em;
+    color: #333;
+  }
+</style>
