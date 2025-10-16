@@ -1,0 +1,33 @@
+<% provide :hide_layout_parts, true %>
+
+<!-- ロゴ（application.css に連動） -->
+<header class="logo">
+  <%= link_to "Web Note", root_path, class: "logo-link" %>
+</header>
+
+<main class="search-results">
+  <h2>検索結果</h2>
+
+  <% if @notes.present? %>
+    <ul class="note-list">
+      <% @notes.each do |note| %>
+        <li class="note-item">
+          <%= link_to note_path(note), class: "note-link" do %>
+            <h3 class="note-title"><%= note.title %></h3>
+            <p class="note-preview"><%= truncate(note.content, length: 100) %></p>
+            <% if note.tags.reject(&:blank?).any? %>
+              <p class="note-tags">タグ: <%= note.tags.reject(&:blank?).join(", ") %></p>
+            <% end %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+
+    <!-- ページネーション -->
+    <div class="pagination">
+      <%= paginate @notes %>
+    </div>
+  <% else %>
+    <p class="no-results">該当するノートは見つかりませんでした。</p>
+  <% end %>
+</main>

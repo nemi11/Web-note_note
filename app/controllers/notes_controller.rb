@@ -23,6 +23,11 @@ class NotesController < ApplicationController
     @note = Note.find(params[:id])
   end
 
+  def search
+    @query = params[:q]
+    @notes = Note.search(@query).page(params[:page]).per(5)
+  end
+
   def confirm
     @note = Note.new(note_params)
     @note.user = current_user

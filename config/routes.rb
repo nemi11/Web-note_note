@@ -31,10 +31,10 @@ Rails.application.routes.draw do
   # ----------------------
   # ノート関連
   # ----------------------
-  get 'notes/mine', to: 'notes#mine', as: :my_notes
   resources :notes, only: [:new, :create, :index, :show] do
    collection do
-     post :confirm
+    post :confirm
+    get :search
    end
   end
 

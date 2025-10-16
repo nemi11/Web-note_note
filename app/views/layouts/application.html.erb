@@ -22,34 +22,42 @@
     <div class="page-wrapper">
 
       <% unless content_for?(:hide_layout_parts) %>
-        <header>
-          <div class="header-center">
-            <div class="search-group">
-              <div class="logo">Web Note</div>
-              <div class="search-box">
-                <input type="text" placeholder="Search notes...">
-                <button>Search</button>
-              </div>
-            </div>
-          </div>
-          <div class="header-light">
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-            <% if user_signed_in? %>
-              <i class="fa-solid fa-bell"></i>
-              <i class="fa-solid fa-heart"></i>
-              <div class="menu-icon">
-                <%= render "layouts/menu" %>
-                <%= link_to "ノート作成", new_note_path, class: "btn btn-primary" %>
-                <%= link_to 'Logout', destroy_user_session_path, data: { turbo_method: :delete } %>
-              </div>
-            <% else %>
-              <% if defined?(custom_signup_path) %>
-                <%= link_to "会員登録", custom_signup_path %>
-              <% end %>
-              <%= link_to "ログイン", login_path %>
-            <% end %>
-          </div>
-        </header>
+     <header>
+  <div class="header-center">
+    <div class="search-group">
+      <!-- ロゴ -->
+      <div class="logo">
+        <%= link_to "Web Note", root_path, style: "text-decoration: none; color: white; font-weight: bold;" %>
+      </div>
+
+      <div class="search-box">
+        <form action="/notes/search" method="get">
+          <input type="text" name="q" placeholder="タイトル・タグ・本文から検索">
+          <button type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="header-light">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <% if user_signed_in? %>
+      <i class="fa-solid fa-bell"></i>
+      <i class="fa-solid fa-heart"></i>
+      <div class="menu-icon">
+        <%= render "layouts/menu" %>
+        <%= link_to "ノート作成", new_note_path, class: "btn btn-primary" %>
+        <%= link_to 'Logout', destroy_user_session_path, data: { turbo_method: :delete } %>
+      </div>
+    <% else %>
+      <% if defined?(custom_signup_path) %>
+        <%= link_to "会員登録", custom_signup_path %>
+      <% end %>
+      <%= link_to "ログイン", login_path %>
+    <% end %>
+  </div>
+</header>
       <% end %>
 
       <main>
