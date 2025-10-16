@@ -36,6 +36,25 @@ main {
   --header-font-size: 28px; /* ヘッダーロゴ文字サイズ */
 }
 
+/* ロゴ */
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  background-color: var(--main-color);
+  text-align: center;
+  padding: 1em 2em;
+}
+
+.logo a,
+.logo-link {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.4em;
+  font-family: "Hiragino Sans", "Noto Sans JP", sans-serif;
+}
+
 /* ============================= */
 /* ヘッダー */
 /* ============================= */

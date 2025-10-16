@@ -1,0 +1,170 @@
+<% provide :hide_layout_parts, true %>
+
+<!-- ヘッダー（ロゴだけ） -->
+<header class="confirm-header">
+  <div class="logo">
+    <%= link_to "Web Note", root_path, style: "text-decoration: none; color: white; font-weight: bold; font-size:1.2em;" %>
+  </div>
+</header>
+
+<main class="note-form-container">
+  <h2>ノート確認画面</h2>
+
+  <div class="note-preview">
+    <p><strong>タイトル:</strong> <%= @note.title %></p>
+    <p><strong>内容:</strong> <%= @note.content %></p>
+
+    <% if @note.extra_english.present? %>
+      <p><strong>英文:</strong></p>
+      <ul>
+        <% Array(@note.extra_english).each do |text| %>
+          <li><%= text %></li>
+        <% end %>
+      </ul>
+    <% end %>
+
+    <% if @note.extra_translation.present? %>
+      <p><strong>翻訳:</strong></p>
+      <ul>
+        <% Array(@note.extra_translation).each do |text| %>
+          <li><%= text %></li>
+        <% end %>
+      </ul>
+    <% end %>
+
+    <% if @note.explanations.present? %>
+      <p><strong>説明:</strong></p>
+      <ul>
+        <% Array(@note.explanations).each do |text| %>
+          <li><%= text %></li>
+        <% end %>
+      </ul>
+    <% end %>
+
+    <% if @note.divider.present? %>
+      <% Array(@note.divider).each do |_d| %>
+        <div class="divider"></div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="button-group">
+    <!-- 保存ボタン -->
+    <%= form_with model: @note, url: notes_path, method: :post do |f| %>
+      <%= f.hidden_field :title %>
+      <%= f.hidden_field :content %>
+
+      <% Array(@note.tags).each do |tag| %>
+        <%= hidden_field_tag "note[tags][]", tag %>
+      <% end %>
+
+      <% Array(@note.extra_english).each do |v| %>
+        <%= hidden_field_tag "note[extra_english][]", v %>
+      <% end %>
+
+      <% Array(@note.extra_translation).each do |v| %>
+        <%= hidden_field_tag "note[extra_translation][]", v %>
+      <% end %>
+
+      <% Array(@note.explanations).each do |v| %>
+        <%= hidden_field_tag "note[explanations][]", v %>
+      <% end %>
+
+      <% Array(@note.divider).each do |v| %>
+        <%= hidden_field_tag "note[divider][]", v %>
+      <% end %>
+
+      <%= f.submit "保存する", class: "btn btn-primary" %>
+    <% end %>
+
+    <!-- 修正ボタン -->
+    <%= link_to "修正する", new_note_path(note: {
+          title: @note.title,
+          content: @note.content,
+          tags: @note.tags,
+          extra_english: @note.extra_english,
+          extra_translation: @note.extra_translation,
+          explanations: @note.explanations,
+          divider: @note.divider
+        }), class: "btn btn-secondary" %>
+  </div>
+</main>
+
+<!-- CSS -->
+<style>
+
+.note-form-container {
+  max-width: 720px;
+  margin: 0 auto 3em auto;
+  padding: 2em;
+  background: #fff;
+  border-radius: 16px;
+  font-family: "Hiragino Sans", "Noto Sans JP", sans-serif;
+}
+
+.note-form-container h2 {
+  text-align: center;
+  margin-bottom: 1.5em;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #222;
+}
+
+.note-preview {
+  background-color: #f9f9f9;
+  padding: 1.5em;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  margin-bottom: 2em;
+}
+
+.note-preview p {
+  margin: 0.5em 0;
+  font-size: 1.1em;
+}
+
+.note-preview strong {
+  display: inline-block;
+  width: 6em;
+}
+
+.divider {
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+}
+
+.btn {
+  padding: 0.7em 1.5em;
+  border: none;
+  border-radius: 4px;
+  font-size: 1em;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.2s ease;
+}
+
+.btn-primary {
+  background-color: #000;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background-color: #222;
+}
+
+.btn-secondary {
+  background-color: #000;
+  color: #fff;
+}
+
+.btn-secondary:hover {
+  background-color: #333;
+}
+</style>
