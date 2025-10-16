@@ -24,23 +24,27 @@ class Note < ApplicationRecord
   # -----------------------------
   # 検索メソッド
   # -----------------------------
-  def self.search(query)
-    return all if query.blank?
+def self.search(query)
+  return all if query.blank?
 
-    # 複数キーワード対応
-    keywords = query.split
-    notes = self
+  keywords = query.split.map(&:strip).reject(&:blank?)
+  return all if keywords.empty?
 
-    keywords.each do |word|
-    notes = notes.where(
-      "title LIKE :word OR content LIKE :word OR EXISTS (
-        SELECT 1 FROM notes n
-        WHERE n.id = notes.id AND JSON_EXTRACT(n.tags, '$') LIKE :word
-      )",
-      word: "%#{word}%"
-    )
-   end
+  conditions = []
+  values = []
 
-    notes
+  keywords.each do |kw|
+    conditions << <<~SQL.squish
+      (
+        title ILIKE ? OR
+        tags::jsonb @> ? OR
+        extra_english::jsonb @> ? OR
+        extra_translation::jsonb @> ?
+      )
+    SQL
+    values += ["%#{kw}%", "[\"#{kw}\"]", "[\"#{kw}\"]", "[\"#{kw}\"]"]
   end
+
+  where(conditions.join(" AND "), *values)
+end
 end
