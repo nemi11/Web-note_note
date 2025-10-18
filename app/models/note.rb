@@ -15,6 +15,7 @@ class Note < ApplicationRecord
   belongs_to :user
   has_many :sections, inverse_of: :note
   accepts_nested_attributes_for :sections, allow_destroy: true
+  has_many :comments, dependent: :destroy
 
   # -----------------------------
   # バリデーション
@@ -24,27 +25,27 @@ class Note < ApplicationRecord
   # -----------------------------
   # 検索メソッド
   # -----------------------------
-def self.search(query)
-  return all if query.blank?
+  def self.search(query)
+    return all if query.blank?
 
-  keywords = query.split.map(&:strip).reject(&:blank?)
-  return all if keywords.empty?
+    keywords = query.split.map(&:strip).reject(&:blank?)
+    return all if keywords.empty?
 
-  conditions = []
-  values = []
+    conditions = []
+    values = []
 
-  keywords.each do |kw|
-    conditions << <<~SQL.squish
-      (
-        title ILIKE ? OR
-        tags::jsonb @> ? OR
-        extra_english::jsonb @> ? OR
-        extra_translation::jsonb @> ?
-      )
-    SQL
-    values += ["%#{kw}%", "[\"#{kw}\"]", "[\"#{kw}\"]", "[\"#{kw}\"]"]
+    keywords.each do |kw|
+      conditions << <<~SQL.squish
+        (
+          title ILIKE ? OR
+          tags::jsonb @> ? OR
+          extra_english::jsonb @> ? OR
+          extra_translation::jsonb @> ?
+        )
+      SQL
+      values += ["%#{kw}%", "[\"#{kw}\"]", "[\"#{kw}\"]", "[\"#{kw}\"]"]
+    end
+
+    where(conditions.join(" AND "), *values)
   end
-
-  where(conditions.join(" AND "), *values)
-end
 end

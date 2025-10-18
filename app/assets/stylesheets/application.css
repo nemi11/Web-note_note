@@ -226,24 +226,20 @@ button.next { right: 10px; }
 }
 
 /* フラッシュメッセージ共通 */
-.flash-notice,
-.flash-alert {
-  max-width: 400px;       /* フォーム幅に合わせる */
-  margin: 0 auto 15px;    /* 上下余白＋左右中央 */
-  padding: 10px 15px;
-  border-radius: 6px;
-  text-align: center;     /* 文字中央揃え */
-  box-sizing: border-box;
+.flash-message {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding: 0.8em 1em;
+  font-size: 1em;
+  font-weight: bold;
+  color: white;
 }
 
-/* 成功系 */
 .flash-notice {
-  background-color: #e6ffed;
-  color: #007b2e;
+  background-color: #8acde3;
 }
 
-/* エラー系 */
 .flash-alert {
-  background-color: #efe7e7;
-  color: #d02121;
+  background-color: #e38a8a;
 }

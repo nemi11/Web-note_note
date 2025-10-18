@@ -38,6 +38,10 @@ Rails.application.routes.draw do
    end
   end
 
+  resources :notes do
+   resources :comments, only: [:create]
+  end
+
   # ----------------------
   # ユーザー関連
   # ----------------------

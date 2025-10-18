@@ -1,11 +1,15 @@
 <% provide :hide_layout_parts, true %>
 
-<!-- ロゴ（application.css に沿った構造） -->
+<!-- ロゴ -->
 <header class="logo-header">
   <div class="logo">
     <%= link_to "Web Note", root_path, class: "logo-link" %>
   </div>
 </header>
+
+<% flash.each do |type, message| %>
+  <div class="flash-message flash-<%= type %>"><%= message %></div>
+<% end %>
 
 <main class="note-detail">
   <h1 class="note-title"><%= @note.title %></h1>
@@ -67,9 +71,46 @@
       </ul>
     </section>
   <% end %>
+
+  <!-- コメントセクション -->
+  <section class="note-section">
+    <h2>コメント</h2>
+
+    <%= form_with(model: [@note, Comment.new], local: true) do |form| %>
+      <div class="comment-form">
+        <%= form.text_area :body, rows: 3, placeholder: "コメントを書く…" %>
+        <%= form.hidden_field :parent_id, value: nil %>
+        <%= form.submit "投稿", class: "comment-submit" %>
+      </div>
+    <% end %>
+
+    <ul class="comment-list">
+      <% @note.comments.where(parent_id: nil).each do |comment| %>
+        <li class="comment-item">
+          <p class="comment-body"><%= comment.body %></p>
+
+          <%= form_with(model: [@note, Comment.new], local: true) do |form| %>
+            <div class="reply-form">
+              <%= form.text_area :body, rows: 2, placeholder: "返信を書く…" %>
+              <%= form.hidden_field :parent_id, value: comment.id %>
+              <%= form.submit "返信", class: "reply-submit" %>
+            </div>
+          <% end %>
+
+          <% if comment.replies.any? %>
+            <ul class="reply-list">
+              <% comment.replies.each do |reply| %>
+                <li class="reply-item"><%= reply.body %></li>
+              <% end %>
+            </ul>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </section>
 </main>
 
-<!-- ✅ CSS（1ページ完結） -->
+<!-- CSS（1ページ完結） -->
 <style>
   :root {
     --main-color: #8acde3;
@@ -83,7 +124,9 @@
 
   .logo-header {
     background-color: var(--main-color);
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 1em 2em;
   }
 
@@ -138,5 +181,58 @@
   .note-section li {
     margin-bottom: 0.5em;
     color: #333;
+  }
+
+  .comment-form,
+  .reply-form {
+    margin-bottom: 1em;
+  }
+
+  .comment-form textarea,
+  .reply-form textarea {
+    width: 100%;
+    padding: 0.5em;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  .comment-submit,
+  .reply-submit {
+    margin-top: 0.5em;
+    background-color: var(--main-color);
+    color: white;
+    border: none;
+    padding: 0.4em 1em;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .comment-list {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .comment-item {
+    margin-bottom: 1.5em;
+    padding: 1em;
+    background: #f9f9f9;
+    border-radius: 6px;
+  }
+
+  .comment-body {
+    margin-bottom: 0.5em;
+    color: #333;
+  }
+
+  .reply-list {
+    list-style: none;
+    padding-left: 1em;
+    margin-top: 0.5em;
+  }
+
+  .reply-item {
+    margin-bottom: 0.5em;
+    color: #555;
   }
 </style>
