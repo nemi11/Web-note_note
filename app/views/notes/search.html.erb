@@ -1,6 +1,5 @@
 <% provide :hide_layout_parts, true %>
 
-<!-- ロゴ（構造を分離してCSSが正しく効くように） -->
 <header class="logo-header">
   <div class="logo">
     <%= link_to "Web Note", root_path, class: "logo-link" %>
@@ -10,13 +9,41 @@
 <main class="search-results">
   <h2>検索結果</h2>
 
+  <% def extract_match(array, query)
+       return "" if array.blank? || query.blank?
+       match = array.find { |text| text.include?(query) }
+       match ? highlight(truncate(match, length: 100), query) : truncate(array.first.to_s, length: 100)
+     end %>
+
   <% if @notes.present? %>
     <ul class="note-list">
       <% @notes.each do |note| %>
         <li class="note-item">
           <%= link_to note_path(note), class: "note-link" do %>
             <h3 class="note-title"><%= note.title %></h3>
-            <p class="note-preview"><%= truncate(note.content, length: 100) %></p>
+
+            <% if note.extra_english.present? %>
+              <div class="note-body">
+                <div class="note-preview">
+                  <%= extract_match(note.extra_english, @query.to_s) %>
+                </div>
+                <div class="note-full">
+                  <%= simple_format(highlight(note.extra_english.join("\n"), @query.to_s)) %>
+                </div>
+              </div>
+            <% end %>
+
+            <% if note.extra_translation.present? %>
+              <div class="note-body">
+                <div class="note-preview">
+                  <%= extract_match(note.extra_translation, @query.to_s) %>
+                </div>
+                <div class="note-full">
+                  <%= simple_format(highlight(note.extra_translation.join("\n"), @query.to_s)) %>
+                </div>
+              </div>
+            <% end %>
+
             <% if note.tags.reject(&:blank?).any? %>
               <p class="note-tags">タグ: <%= note.tags.reject(&:blank?).join(", ") %></p>
             <% end %>
@@ -33,10 +60,10 @@
   <% end %>
 </main>
 
-<!-- ✅ 全体CSS（1ページ完結） -->
 <style>
   :root {
     --main-color: #8acde3;
+    --highlight-color: #fff3a0;
   }
 
   body {
@@ -45,7 +72,6 @@
     background-color: #fefefe;
   }
 
-  /* ロゴヘッダー（背景・中央揃え） */
   .logo-header {
     background-color: var(--main-color);
     text-align: center;
@@ -53,8 +79,7 @@
   }
 
   .logo {
-    font-size: 24px;
-    font-weight: bold;
+    display: inline-block;
   }
 
   .logo a,
@@ -81,7 +106,7 @@
   .note-item {
     background-color: #f9f9f9;
     padding: 1em;
-    margin-bottom: 1em;
+    margin-bottom: 1.5em;
     border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   }
@@ -98,9 +123,29 @@
     color: #333;
   }
 
+  .note-body {
+    margin: 0.3em 0;
+  }
+
   .note-preview {
     font-size: 1em;
     color: #555;
+  }
+
+  .note-full {
+    display: none;
+    font-size: 1em;
+    color: #333;
+    white-space: pre-wrap;
+    margin-top: 0.3em;
+  }
+
+  .note-item:hover .note-preview {
+    display: none;
+  }
+
+  .note-item:hover .note-full {
+    display: block;
   }
 
   .note-tags {
@@ -124,16 +169,26 @@
   .pagination span {
     display: inline-block;
     margin: 0 4px;
-    padding: 6px 10px;
+    padding: 6px 12px;
     border-radius: 4px;
-    background-color: #eee;
-    color: #333;
+    background-color: #000;
+    color: #fff;
     text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+  }
+
+  .pagination a:hover {
+    background-color: #333;
   }
 
   .pagination .current {
-    background-color: var(--main-color);
-    color: white;
+    background-color: #333;
+    color: #fff;
+  }
+
+  mark {
+    background-color: var(--highlight-color);
     font-weight: bold;
   }
 </style>
