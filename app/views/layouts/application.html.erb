@@ -5,9 +5,16 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <!-- 共通 CSS -->
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+
+    <!-- ページ固有 CSS -->
     <%= yield :page_css %>
+
+    <!-- 共通 JS -->
     <%= javascript_importmap_tags %>
+
+    <!-- ページ固有 JS -->
     <%= yield :page_js %>
   </head>
 
@@ -15,57 +22,50 @@
     <div class="page-wrapper">
 
       <% unless content_for?(:hide_layout_parts) %>
-        <header>
-          <div class="header-center">
-            <div class="search-group">
-              <div class="logo">
-                <%= link_to "Web Note", root_path, style: "text-decoration: none; color: white; font-weight: bold;" %>
-              </div>
+     <header>
+  <div class="header-center">
+    <div class="search-group">
+      <!-- ロゴ -->
+      <div class="logo">
+        <%= link_to "Web Note", root_path, style: "text-decoration: none; color: white; font-weight: bold;" %>
+      </div>
 
-              <div class="search-box">
-                <form action="/notes/search" method="get">
-                  <input type="text" name="q" placeholder="タイトル・タグ・本文から検索">
-                  <button type="submit">Search</button>
-                </form>
-              </div>
-            </div>
-          </div>
+      <div class="search-box">
+        <form action="/notes/search" method="get">
+          <input type="text" name="q" placeholder="タイトル・タグ・本文から検索">
+          <button type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </div>
 
-          <div class="header-light">
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <div class="header-light">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-            <% if user_signed_in? %>
-              <i class="fa-solid fa-bell"></i>
-              <i class="fa-solid fa-heart"></i>
-              <div class="menu-icon">
-                <%= render "layouts/menu" %>
-                <%= link_to "ノート作成", new_note_path, class: "btn btn-primary" %>
-                <%= link_to 'Logout', destroy_user_session_path, data: { turbo_method: :delete } %>
-              </div>
-            <% else %>
-              <% if defined?(custom_signup_path) %>
-                <%= link_to "会員登録", custom_signup_path %>
-              <% end %>
-              <%= link_to "ログイン", login_path %>
-            <% end %>
-          </div>
-        </header>
-
-        <!-- フラッシュメッセージ（ヘッダーのすぐ下） -->
-        <% flash.each do |type, message| %>
-          <div class="flash-message flash-<%= type %>"><%= message %></div>
-        <% end %>
+    <% if user_signed_in? %>
+      <i class="fa-solid fa-bell"></i>
+      <i class="fa-solid fa-heart"></i>
+      <div class="menu-icon">
+        <%= render "layouts/menu" %>
+        <%= link_to "ノート作成", new_note_path, class: "btn btn-primary" %>
+        <%= link_to 'Logout', destroy_user_session_path, data: { turbo_method: :delete } %>
+      </div>
+    <% else %>
+      <% if defined?(custom_signup_path) %>
+        <%= link_to "会員登録", custom_signup_path %>
+      <% end %>
+      <%= link_to "ログイン", login_path %>
+    <% end %>
+  </div>
+</header>
       <% end %>
 
       <main>
-        <% unless content_for?(:hide_layout_parts) %>
-          <!-- layout側のフラッシュは非表示にする -->
-          <%# flash.each do |type, message| %>
-            <%# <div class="flash-message flash-<%= type %>"><%= message %></div> %>
-          <%# end %>
+        <% flash.each do |type, message| %>
+          <div class="flash-<%= type %>"><%= message %></div>
         <% end %>
 
-        <%= yield %>
+        <%= yield %> <!-- ページ固有コンテンツ -->
       </main>
 
       <% unless content_for?(:hide_layout_parts) %>
