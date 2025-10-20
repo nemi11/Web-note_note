@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
   # ログイン成功後
   def after_sign_in_path_for(resource)
-    dashboard_index_path
+    root_path
   end
 
   # ログアウト後にトップページに戻る

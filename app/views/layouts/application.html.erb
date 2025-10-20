@@ -44,7 +44,7 @@
               <div class="menu-icon">
                 <%= render "layouts/menu" %>
                 <%= link_to "ノート作成", new_note_path, class: "btn btn-primary" %>
-                <%= link_to 'Logout', destroy_user_session_path, data: { turbo_method: :delete } %>
+                <%= link_to 'ログアウト', logout_path, method: :delete, data: { confirm: 'ログアウトしますか？' }, class: 'nav__logout-button' %>
               </div>
             <% else %>
               <% if defined?(custom_signup_path) %>
@@ -55,7 +55,7 @@
           </div>
         </header>
 
-        <!-- フラッシュメッセージ（ヘッダーのすぐ下） -->
+        <!-- フラッシュメッセージ -->
         <% flash.each do |key, value| %>
           <div class="flash-message flash-<%= key %>"><%= value %></div>
         <% end %>
@@ -79,5 +79,39 @@
       <% end %>
 
     </div>
+
+    <!-- 👇 応急処置用のJSをここに直接書く -->
+    <!-- 👇 応急処置JS -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        console.log("応急JSロード完了");
+
+        // メニュートグルボタン
+        const menuButton = document.querySelector(".menu-button");
+        const menuWrapper = document.querySelector(".menu-wrapper");
+
+        if (menuButton && menuWrapper) {
+          menuButton.addEventListener("click", function() {
+            const expanded = this.getAttribute("aria-expanded") === "true";
+            this.setAttribute("aria-expanded", !expanded);
+            menuWrapper.classList.toggle("open"); // CSSで.open時の見た目を制御する
+          });
+        }
+
+        // ツールチップ表示（hover時）
+        const menuItems = document.querySelectorAll(".menu-item");
+        menuItems.forEach((item) => {
+          const tooltip = item.querySelector(".tooltip");
+          if (!tooltip) return;
+
+          item.addEventListener("mouseenter", () => {
+            tooltip.classList.remove("hidden");
+          });
+          item.addEventListener("mouseleave", () => {
+            tooltip.classList.add("hidden");
+          });
+        });
+      });
+    </script>
   </body>
 </html>

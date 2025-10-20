@@ -14,8 +14,14 @@ Rails.application.routes.draw do
     get    "login",  to: "users/sessions#new",       as: :login
     post   "login",  to: "users/sessions#create"
     delete "logout", to: "users/sessions#destroy",   as: :logout
+    get "/logout", to: "users/sessions#destroy" # GETでもdestroyアクションに飛ばす
   end
 
+  # ----------------------
+  # ユーザー詳細ページ（show）
+  # ----------------------
+  resources :users, only: [:show]
+  
   # ----------------------
   # 共通トップページ
   # ----------------------
