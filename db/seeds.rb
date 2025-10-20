@@ -8,9 +8,16 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
-User.find_or_create_by!(email: 'admin@example.com') do |user|
-  user.password = 'password123'
-  user.password_confirmation = 'password123'
-  user.admin = true
-  user.confirmed_at = Time.current # ← これで確認済み扱いになる
-end
+# db/seeds.rb
+
+admin_email = "nene@example.com"
+
+user = User.find_or_initialize_by(email: admin_email)
+user.assign_attributes(
+  name: "nene",
+  password: "password",
+  password_confirmation: "password",
+  confirmed_at: Time.current,
+  admin: true
+)
+user.save!
