@@ -39,6 +39,8 @@ gem 'jbuilder'
 
 gem 'redcarpet'
 gem 'devise', '4.8.1'
+gem 'dotenv-rails'
+
 gem 'kaminari'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
